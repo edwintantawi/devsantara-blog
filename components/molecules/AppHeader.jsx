@@ -4,23 +4,21 @@ import AppButton from '../atoms/AppButton';
 import AppWrapper from '../atoms/AppWrapper';
 import Colors from '../../styles/colors';
 
-const AppHeader = () => {
-  return (
-    <Header>
-      <AppWrapper>
-        <HeaderWrapper>
-          <AppLogo />
-          <HeaderAction>
-            <AppButton type="button">Sign in</AppButton>
-            <AppButton type="button" white>
-              Create account
-            </AppButton>
-          </HeaderAction>
-        </HeaderWrapper>
-      </AppWrapper>
-    </Header>
-  );
-};
+const AppHeader = () => (
+  <Header>
+    <AppWrapper>
+      <HeaderWrapper>
+        <AppLogo />
+        <HeaderAction>
+          <AppButton type="button">Sign in</AppButton>
+          <AppButton type="button" white>
+            Create account
+          </AppButton>
+        </HeaderAction>
+      </HeaderWrapper>
+    </AppWrapper>
+  </Header>
+);
 
 const Header = styled.header`
   position: sticky;

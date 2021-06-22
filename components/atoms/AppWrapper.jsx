@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-const AppWrapper = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>;
-};
+const AppWrapper = ({ children }) => <Wrapper>{children}</Wrapper>;
 
 const Wrapper = styled.div`
   max-width: 1440px;

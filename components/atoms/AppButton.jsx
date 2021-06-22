@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Colors from '../../styles/colors';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import Colors from '../../styles/colors';
 
 const AppButton = ({ children, type, href, buttonType, white }) => {
   if (type === 'link') {
@@ -12,7 +12,7 @@ const AppButton = ({ children, type, href, buttonType, white }) => {
     );
   }
 
-  if (type == 'button') {
+  if (type === 'button') {
     return (
       <Button type={buttonType} white={white}>
         {children}
@@ -60,6 +60,8 @@ AppButton.propTypes = {
 
 AppButton.defaultProps = {
   buttonType: 'button',
+  href: '',
+  white: false,
 };
 
 export default AppButton;

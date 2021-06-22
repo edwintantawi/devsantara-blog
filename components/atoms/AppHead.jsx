@@ -9,18 +9,16 @@ const BASE_KEYWORDS =
 
 const BASE_URL = 'https://devsantara.vercel.app';
 
-const AppHead = ({ title, keywords, description, url }) => {
-  return (
-    <Head>
-      <title>{title}</title>
-      <meta name="keywords" content={`${BASE_KEYWORDS}, ${keywords}`} />
-      <meta name="description" content={description} />
-      <meta property="og:title" content={`Devsantara | ${title}`} />
-      <meta property="og:url" content={`${BASE_URL}/${url}`} />
-      <meta property="og:image" content="/android-icon-192x192.png" />
-    </Head>
-  );
-};
+const AppHead = ({ title, keywords, description, url }) => (
+  <Head>
+    <title>{title}</title>
+    <meta name="keywords" content={`${BASE_KEYWORDS}, ${keywords}`} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={`Devsantara | ${title}`} />
+    <meta property="og:url" content={`${BASE_URL}/${url}`} />
+    <meta property="og:image" content="/android-icon-192x192.png" />
+  </Head>
+);
 
 // proptypes
 AppHead.propTypes = appHeadPropTypes;

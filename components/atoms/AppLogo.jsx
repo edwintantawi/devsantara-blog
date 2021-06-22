@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import Image from 'next/image';
+import logo from '../../public/devsantara.svg';
 
-const AppLogo = () => {
-  return (
-    <Link href="/" passHref>
-      <Wrapper>
-        <img src="/devsantara.svg" alt="Devsantara" />
-      </Wrapper>
-    </Link>
-  );
-};
+const AppLogo = () => (
+  <Link href="/" passHref>
+    <Wrapper>
+      <Image src={logo} alt="Devsantara" />
+    </Wrapper>
+  </Link>
+);
 
 // styled
 const Wrapper = styled.a`
