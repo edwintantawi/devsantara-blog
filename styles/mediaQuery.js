@@ -6,6 +6,6 @@ export const screen_size = {
   xxl: 1536,
 };
 
-const minWidth = (screen) => `(min-width: ${screen_size[screen]}px)`;
+const minWidth = (screen) => `screen and (min-width: ${screen_size[screen]}px)`;
 
 export default minWidth;
