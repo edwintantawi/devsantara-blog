@@ -10,12 +10,12 @@ const AppHeader = () => {
       <AppWrapper>
         <HeaderWrapper>
           <AppLogo />
-          <div>
+          <HeaderAction>
             <AppButton type="button">Sign in</AppButton>
             <AppButton type="button" white>
-              Create an account
+              Create account
             </AppButton>
-          </div>
+          </HeaderAction>
         </HeaderWrapper>
       </AppWrapper>
     </Header>
@@ -33,6 +33,10 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0.8rem 0;
+`;
+
+const HeaderAction = styled.div`
+  display: flex;
 `;
 
 export default AppHeader;
