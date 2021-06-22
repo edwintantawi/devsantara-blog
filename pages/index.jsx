@@ -1,5 +1,11 @@
+import AppShell from '../components/organisms/AppShell';
+
 const Home = () => {
-  return <h1>Devsantara</h1>;
+  return (
+    <AppShell>
+      <h1>Devsantara</h1>
+    </AppShell>
+  );
 };
 
 export default Home;
