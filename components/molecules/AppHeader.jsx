@@ -8,9 +8,18 @@ import AppWrapper from '../atoms/AppWrapper';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 import useDataContext from '../../hooks/useDataContext';
+import useAppContext from '../../hooks/useAppContext';
+import ACTION_TYPES from '../../context/appContext/actionTypes';
 
 const AppHeader = () => {
   const [{ user }] = useDataContext();
+  const [, dispatch] = useAppContext();
+  const handleToggleNav = () => {
+    dispatch({
+      type: ACTION_TYPES.SET_NAV_DRAWER,
+    });
+  };
+
   return (
     <Header>
       <AppWrapper>
@@ -30,7 +39,9 @@ const AppHeader = () => {
                 <Avatar />
               </IconButton>
             )}
-            <MenuIcon style={{ color: Colors.white, fontSize: '30px' }} />
+            <MenuButton type="button" onClick={handleToggleNav}>
+              <MenuIcon />
+            </MenuButton>
           </HeaderAction>
         </HeaderWrapper>
       </AppWrapper>
@@ -69,11 +80,21 @@ const HeaderAction = styled.div`
     height: 2.5rem;
     cursor: pointer;
   }
+`;
+
+const MenuButton = styled.button`
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  background: none;
+
+  .MuiSvgIcon-root {
+    color: ${Colors.white};
+    font-size: 30px;
+  }
 
   @media ${minWidth('md')} {
-    & > .MuiSvgIcon-root {
-      display: none;
-    }
+    display: none;
   }
 `;
 
