@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import Image from 'next/image';
-import logo from '../../public/devsantara.svg';
+import logo from '../../public/assets/devsantara.svg';
 
 const AppLogo = () => (
   <Link href="/" passHref>
