@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-family: 'Poppins', sans-serif;
   }
+
   html {
     @media ${minWidth('md')} {
       font-size: 16px;
