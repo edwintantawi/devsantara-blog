@@ -4,6 +4,7 @@ import AppHeader from '../molecules/AppHeader';
 import AppWrapper from '../atoms/AppWrapper';
 import AppFooter from '../molecules/AppFooter';
 import { appHeadPropTypes } from '../../porpTypes/appHead.proptypes';
+import minWidth from '../../styles/mediaQuery';
 
 const AppShell = ({ children, title, keyword, description, url }) => (
   <RootLayout>
@@ -35,8 +36,13 @@ const ViewLayout = styled.div`
 
 const MainLayout = styled.main`
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
   column-gap: 32px;
+  padding: 1.5rem 0;
+
+  @media ${minWidth('md')} {
+    grid-template-columns: auto 1fr;
+  }
 `;
 
 AppShell.propTypes = appHeadPropTypes;
