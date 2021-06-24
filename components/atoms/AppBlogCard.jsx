@@ -60,8 +60,8 @@ const BlogCardContent = styled.div`
       display: block;
       margin-top: 1rem;
       display: -webkit-box;
-      font-size: 1.75rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: 600;
       line-height: 1.2;
       max-height: 4.4rem;
       overflow: hidden;
