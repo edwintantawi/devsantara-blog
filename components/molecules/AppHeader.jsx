@@ -70,13 +70,20 @@ const HeaderAction = styled.div`
 
   .MuiAvatar-root,
   & > .MuiSvgIcon-root {
-    margin-left: 1rem;
     display: flex;
   }
 
   .MuiButtonBase-root {
     padding: 0;
   }
+
+  .MuiButtonBase-root {
+    margin-left: 1rem;
+  }
+  .MuiAvatar-root {
+    border: 2px solid ${Colors.white};
+  }
+
   .MuiAvatar-root {
     width: 2.5rem;
     height: 2.5rem;
