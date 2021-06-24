@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
+import minWidth from '../../styles/mediaQuery';
 
 const AppLink = ({ title, href, Icon }) => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const LinkLayout = styled.a`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0.8rem 1rem;
+  padding: 1rem;
   margin-bottom: 0.8rem;
   border-radius: 6px;
   text-decoration: none;
@@ -34,6 +35,10 @@ const LinkLayout = styled.a`
   &:hover {
     background-color: ${({ active }) =>
       active ? Colors.darkBlue : 'rgba(0, 18, 39,0.05)'};
+  }
+
+  @media ${minWidth('md')} {
+    padding: 0.8rem 1rem;
   }
 `;
 
