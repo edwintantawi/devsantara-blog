@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import Avatar from '@material-ui/core/Avatar';
 import MenuIcon from '@material-ui/icons/Menu';
 import AppLogo from '../atoms/AppLogo';
@@ -13,7 +14,7 @@ import ACTION_TYPES from '../../context/appContext/actionTypes';
 
 const AppHeader = () => {
   const [{ user }] = useDataContext();
-  const [, dispatch] = useAppContext();
+  const [{ isActiveNavDrawer }, dispatch] = useAppContext();
   const handleToggleNav = () => {
     dispatch({
       type: ACTION_TYPES.SET_NAV_DRAWER,
@@ -40,7 +41,7 @@ const AppHeader = () => {
               </IconButton>
             )}
             <MenuButton type="button" onClick={handleToggleNav}>
-              <MenuIcon />
+              {isActiveNavDrawer ? <CloseIcon /> : <MenuIcon />}
             </MenuButton>
           </HeaderAction>
         </HeaderWrapper>
@@ -52,6 +53,7 @@ const AppHeader = () => {
 const Header = styled.header`
   position: sticky;
   top: 0;
+  z-index: 10;
   background-color: ${Colors.darkBlue};
 `;
 
