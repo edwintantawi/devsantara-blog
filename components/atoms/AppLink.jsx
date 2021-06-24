@@ -30,6 +30,11 @@ const LinkLayout = styled.a`
     active ? Colors.darkBlue : Colors.white};
   color: ${({ active }) => (active ? Colors.white : Colors.darkBlue)};
   border-left: 0.35rem solid ${Colors.darkBlue};
+
+  &:hover {
+    background-color: ${({ active }) =>
+      active ? Colors.darkBlue : 'rgba(0, 18, 39,0.05)'};
+  }
 `;
 
 const TitleLayout = styled.div`
