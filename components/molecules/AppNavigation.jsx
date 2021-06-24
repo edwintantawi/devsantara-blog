@@ -36,9 +36,11 @@ const AppNavigation = () => {
 
 const NavLayout = styled.nav`
   position: fixed;
+  z-index: 9;
   left: 0;
   right: 0;
   top: 51px;
+  height: max-content;
   background-color: ${Colors.white};
   padding: 1rem;
   border-bottom: 3px solid ${Colors.darkBlue};
@@ -50,7 +52,8 @@ const NavLayout = styled.nav`
   transition: 300ms ease-in-out;
 
   @media ${minWidth('md')} {
-    position: initial;
+    position: sticky;
+    top: 93px;
     width: 17.5rem;
     padding: 0;
     border: none;
