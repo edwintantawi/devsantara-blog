@@ -20,15 +20,15 @@ const AppNavigation = () => {
 
 const NavLayout = styled.nav`
   position: fixed;
-  left: 1rem;
-  right: 1rem;
-  top: 62px;
+  left: 0;
+  right: 0;
+  top: 51px;
   background-color: ${Colors.white};
   padding: 1rem 1rem 0.2rem;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  transform: ${({ active }) => (active ? 'tranlateY(0)' : 'translateY(-10px)')};
+  border-bottom: 3px solid ${Colors.darkBlue};
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transform: ${({ active }) =>
+    active ? 'tranlateY(0)' : 'translateY(-100vh)'};
   opacity: ${({ active }) => (active ? '1' : '0')};
   visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
   transition: 300ms ease-in-out;
