@@ -10,8 +10,10 @@ import minWidth from '../../styles/mediaQuery';
 import Colors from '../../styles/colors';
 import AppButton from '../atoms/AppButton';
 import useAppContext from '../../hooks/useAppContext';
+import useDataContext from '../../hooks/useDataContext';
 
 const AppNavigation = () => {
+  const [{ user }] = useDataContext();
   const [{ isActiveNavDrawer }] = useAppContext();
   return (
     <NavLayout active={isActiveNavDrawer}>
@@ -20,10 +22,14 @@ const AppNavigation = () => {
       <AppLink href="/about" title="About" Icon={GroupIcon} />
       <AppLink href="/dashboard" title="Dashboard" Icon={DashboardIcon} />
       <AppLink href="/settings" title="Settings" Icon={SettingsIcon} />
-      <AppButton type="button" buttonType="button" red full>
-        <ExitToAppIcon />
-        <span style={{ marginLeft: '0.3rem', fontWeight: '700' }}>Logout</span>
-      </AppButton>
+      {user && (
+        <AppButton type="button" buttonType="button" red full>
+          <ExitToAppIcon />
+          <span style={{ marginLeft: '0.3rem', fontWeight: '700' }}>
+            Logout
+          </span>
+        </AppButton>
+      )}
     </NavLayout>
   );
 };
