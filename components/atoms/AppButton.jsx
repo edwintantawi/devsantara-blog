@@ -31,7 +31,7 @@ const baseStyle = `
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;
+  padding: .9rem 2rem;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
