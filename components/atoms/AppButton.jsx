@@ -4,7 +4,16 @@ import Link from 'next/link';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
-const AppButton = ({ children, type, href, buttonType, full, white, red }) => {
+const AppButton = ({
+  children,
+  type,
+  href,
+  buttonType,
+  full,
+  white,
+  red,
+  onClick,
+}) => {
   if (type === 'link') {
     return (
       <Link href={href} passHref>
@@ -17,7 +26,13 @@ const AppButton = ({ children, type, href, buttonType, full, white, red }) => {
 
   if (type === 'button') {
     return (
-      <Button type={buttonType} full={full} white={white} red={red}>
+      <Button
+        type={buttonType}
+        full={full}
+        white={white}
+        red={red}
+        onClick={onClick}
+      >
         {children}
       </Button>
     );
@@ -80,6 +95,7 @@ AppButton.propTypes = {
   href: PropTypes.string,
   full: PropTypes.bool,
   white: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 AppButton.defaultProps = {
@@ -87,6 +103,7 @@ AppButton.defaultProps = {
   href: '',
   full: false,
   white: false,
+  onClick: null,
 };
 
 export default AppButton;
