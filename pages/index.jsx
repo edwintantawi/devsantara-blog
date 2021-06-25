@@ -1,11 +1,11 @@
 import AppShell from '../components/organisms/AppShell';
 import AppNavigation from '../components/molecules/AppNavigation';
-import AppBlogCard from '../components/atoms/AppBlogCard';
+// import AppBlogCard from '../components/atoms/AppBlogCard';
 
 const Home = () => (
   <AppShell>
     <AppNavigation />
-    <div>
+    {/* <div>
       {[0, 1, 2, 3, 4, 5].map((id) => (
         <AppBlogCard
           key={id}
@@ -20,7 +20,7 @@ const Home = () => (
           }}
         />
       ))}
-    </div>
+    </div> */}
   </AppShell>
 );
 
