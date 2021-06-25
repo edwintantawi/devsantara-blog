@@ -11,15 +11,35 @@ import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 import useAuthContext from '../../hooks/useAuthContext';
 import useAppContext from '../../hooks/useAppContext';
-import ACTION_TYPES from '../../context/appContext/actionTypes';
+import APP_ACTION_TYPES from '../../context/appContext/actionTypes';
+import AUTH_ACTION_TYPES from '../../context/authContext/actionTypes';
 import googleLogo from '../../public/assets/google.svg';
+import { auth, googleAuthProvider, localPersistence } from '../../lib/firebase';
 
 const AppHeader = () => {
-  const [{ user }] = useAuthContext();
+  const [{ user }, dispatchAuth] = useAuthContext();
   const [{ isActiveNavDrawer }, dispatch] = useAppContext();
   const handleToggleNav = () => {
     dispatch({
-      type: ACTION_TYPES.SET_NAV_DRAWER,
+      type: APP_ACTION_TYPES.SET_NAV_DRAWER,
+    });
+  };
+
+  const handleGoogleAuth = () => {
+    auth.setPersistence(localPersistence).then(() => {
+      auth.signInWithPopup(googleAuthProvider).then((result) => {
+        const userAuthData = {
+          uid: result.user.uid,
+          displayName: result.user.displayName,
+          email: result.user.email,
+          photoURL: result.user.photoURL,
+        };
+
+        dispatchAuth({
+          type: AUTH_ACTION_TYPES.SET_ACTIVE_USER,
+          payload: userAuthData,
+        });
+      });
     });
   };
 
@@ -30,7 +50,7 @@ const AppHeader = () => {
           <AppLogo />
           <HeaderAction>
             {!user && (
-              <AppButton type="button" white>
+              <AppButton type="button" white onClick={handleGoogleAuth}>
                 <Image src={googleLogo} alt="" />
                 <span>Login with google</span>
               </AppButton>
