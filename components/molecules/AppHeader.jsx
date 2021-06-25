@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Image from 'next/image';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Avatar from '@material-ui/core/Avatar';
@@ -11,6 +12,7 @@ import minWidth from '../../styles/mediaQuery';
 import useDataContext from '../../hooks/useDataContext';
 import useAppContext from '../../hooks/useAppContext';
 import ACTION_TYPES from '../../context/appContext/actionTypes';
+import googleLogo from '../../public/assets/google.svg';
 
 const AppHeader = () => {
   const [{ user }] = useDataContext();
@@ -28,12 +30,10 @@ const AppHeader = () => {
           <AppLogo />
           <HeaderAction>
             {!user && (
-              <>
-                <AppButton type="button">Sign in</AppButton>
-                <AppButton type="button" white>
-                  Create account
-                </AppButton>
-              </>
+              <AppButton type="button" white>
+                <Image src={googleLogo} alt="" />
+                <span>Login with google</span>
+              </AppButton>
             )}
             {user && (
               <IconButton>
