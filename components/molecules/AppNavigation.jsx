@@ -10,10 +10,10 @@ import minWidth from '../../styles/mediaQuery';
 import Colors from '../../styles/colors';
 import AppButton from '../atoms/AppButton';
 import useAppContext from '../../hooks/useAppContext';
-import useDataContext from '../../hooks/useDataContext';
+import useAuthContext from '../../hooks/useAuthContext';
 
 const AppNavigation = () => {
-  const [{ user }] = useDataContext();
+  const [{ user }] = useAuthContext();
   const [{ isActiveNavDrawer }] = useAppContext();
   return (
     <NavLayout active={isActiveNavDrawer}>

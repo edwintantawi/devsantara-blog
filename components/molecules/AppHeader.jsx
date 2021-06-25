@@ -9,13 +9,13 @@ import AppButton from '../atoms/AppButton';
 import AppWrapper from '../atoms/AppWrapper';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
-import useDataContext from '../../hooks/useDataContext';
+import useAuthContext from '../../hooks/useAuthContext';
 import useAppContext from '../../hooks/useAppContext';
 import ACTION_TYPES from '../../context/appContext/actionTypes';
 import googleLogo from '../../public/assets/google.svg';
 
 const AppHeader = () => {
-  const [{ user }] = useDataContext();
+  const [{ user }] = useAuthContext();
   const [{ isActiveNavDrawer }, dispatch] = useAppContext();
   const handleToggleNav = () => {
     dispatch({
