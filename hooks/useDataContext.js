@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { DataContext } from '../context/dataContext/store';
+import { AuthContext } from '../context/authContext/store';
 
-const useDataContext = () => useContext(DataContext);
+const useDataContext = () => useContext(AuthContext);
 
 export default useDataContext;

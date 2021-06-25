@@ -1,15 +1,15 @@
 import GlobalStyle from '../styles/globalStyle';
-import DataContextProvider from '../context/dataContext/store';
+import AuthContextProvider from '../context/authContext/store';
 import AppContextProvider from '../context/appContext/store';
 
 const MyApp = ({ Component, pageProps }) => (
   <>
     <GlobalStyle />
-    <DataContextProvider>
+    <AuthContextProvider>
       <AppContextProvider>
         <Component {...pageProps} />
       </AppContextProvider>
-    </DataContextProvider>
+    </AuthContextProvider>
   </>
 );
 
