@@ -31,7 +31,7 @@ const baseStyle = `
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .9rem 2rem;
+  padding: .7rem 2rem;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
@@ -40,7 +40,7 @@ const baseStyle = `
   cursor: pointer;
 
   @media ${minWidth('md')} {
-    padding: 0.7rem 2rem;
+    padding: 0.6rem 2rem;
   }
 `;
 
@@ -60,6 +60,17 @@ const Button = styled.button`
     if (white) return Colors.white;
     return Colors.darkBlue;
   }};
+
+  img {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  span {
+    margin-left: 0.5rem;
+    font-weight: inherit;
+    font-size: inherit;
+  }
 `;
 
 // proptypes

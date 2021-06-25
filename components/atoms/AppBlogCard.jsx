@@ -97,7 +97,7 @@ const BlogCardIdentity = styled.div`
   span:nth-child(1) {
     font-weight: 600;
     font-size: 0.8rem;
-    color: ${Colors.darkBlue};
+    color: ${Colors.gray};
   }
 
   span:nth-child(2) {
