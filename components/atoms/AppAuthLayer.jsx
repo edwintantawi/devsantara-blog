@@ -1,11 +1,11 @@
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
 import { auth } from '../../lib/firebase';
 import AUTH_ACTION_TYPES from '../../context/authContext/actionTypes';
 
 const AppAuthLayer = () => {
   const [, dispatchAuth] = useAuthContext();
-  useLayoutEffect(() => {
+  useEffect(() => {
     auth.onAuthStateChanged((result) => {
       if (result) {
         const userAuthData = {
