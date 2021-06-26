@@ -11,8 +11,7 @@ import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 import useAuthContext from '../../hooks/useAuthContext';
 import useAppContext from '../../hooks/useAppContext';
-import APP_ACTION_TYPES from '../../context/appContext/actionTypes';
-import AUTH_ACTION_TYPES from '../../context/authContext/actionTypes';
+import ACTION_TYPES from '../../context/actionTypes';
 import googleLogo from '../../public/assets/google.svg';
 import { auth, googleAuthProvider, localPersistence } from '../../lib/firebase';
 
@@ -21,7 +20,7 @@ const AppHeader = () => {
   const [{ isActiveNavDrawer }, dispatch] = useAppContext();
   const handleToggleNav = () => {
     dispatch({
-      type: APP_ACTION_TYPES.SET_NAV_DRAWER,
+      type: ACTION_TYPES.TOGGLE_DRAWER,
     });
   };
 
@@ -36,7 +35,7 @@ const AppHeader = () => {
         };
 
         dispatchAuth({
-          type: AUTH_ACTION_TYPES.SET_ACTIVE_USER,
+          type: ACTION_TYPES.SET_AUTH,
           payload: userAuthData,
         });
       });

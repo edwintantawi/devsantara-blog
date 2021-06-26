@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
 import { auth } from '../../lib/firebase';
-import AUTH_ACTION_TYPES from '../../context/authContext/actionTypes';
+import ACTION_TYPES from '../../context/actionTypes';
 
 const AppAuthLayer = () => {
   const [, dispatchAuth] = useAuthContext();
@@ -16,7 +16,7 @@ const AppAuthLayer = () => {
         };
 
         dispatchAuth({
-          type: AUTH_ACTION_TYPES.SET_ACTIVE_USER,
+          type: ACTION_TYPES.SET_AUTH,
           payload: userAuthData,
         });
       }

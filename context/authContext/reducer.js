@@ -1,8 +1,8 @@
-import ACTION_TYPES from './actionTypes';
+import ACTION_TYPES from '../actionTypes';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ACTION_TYPES.SET_ACTIVE_USER:
+    case ACTION_TYPES.SET_AUTH:
       return {
         ...state,
         user: action.payload,

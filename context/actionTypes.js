@@ -1,0 +1,6 @@
+const ACTION_TYPES = {
+  TOGGLE_DRAWER: 'TOGGLE_DRAWER',
+  SET_AUTH: 'SET_AUTH',
+};
+
+export default ACTION_TYPES;
