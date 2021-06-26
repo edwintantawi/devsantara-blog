@@ -1,108 +1,74 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
-const AppButton = ({
-  children,
-  type,
-  href,
-  buttonType,
-  full,
-  white,
-  red,
-  onClick,
-}) => {
-  if (type === 'link') {
-    return (
-      <Link href={href} passHref>
-        <ButtonLink white={white} full={full}>
-          {children}
-        </ButtonLink>
-      </Link>
-    );
-  }
-
-  if (type === 'button') {
-    return (
-      <Button
-        type={buttonType}
-        full={full}
-        white={white}
-        red={red}
-        onClick={onClick}
-      >
-        {children}
-      </Button>
-    );
-  }
-
-  return null;
-};
+const AppButton = ({ children, type, full, className, onClick }) => (
+  <Button type={type} full={full} className={className} onClick={onClick}>
+    {children}
+  </Button>
+);
 
 // styled
-const baseStyle = `
+const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .7rem 2rem;
+  padding: 1.1rem 2rem;
+  width: max-content;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
-  font-size: .8rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   cursor: pointer;
 
   @media ${minWidth('md')} {
-    padding: 0.6rem 2rem;
-  }
-`;
-
-const ButtonLink = styled.a`
-  ${baseStyle}
-  width: ${({ full }) => (full ? '100%' : 'max-width')};
-  color: ${({ white }) => (white ? Colors.darkBlue : Colors.white)};
-  background-color: ${({ white }) => (white ? Colors.white : Colors.darkBlue)};
-`;
-
-const Button = styled.button`
-  ${baseStyle}
-  width: ${({ full }) => (full ? '100%' : 'max-width')};
-  color: ${({ white }) => (white ? Colors.darkBlue : Colors.white)};
-  background-color: ${({ white, red }) => {
-    if (red) return Colors.red;
-    if (white) return Colors.white;
-    return Colors.darkBlue;
-  }};
-
-  img {
-    width: 1rem;
-    height: 1rem;
+    padding: 0.8rem 2rem;
   }
 
   span {
-    margin-left: 0.5rem;
+    margin-left: 0.3rem;
     font-weight: inherit;
     font-size: inherit;
+  }
+
+  img,
+  .MuiSvgIcon-root {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &.bg-white {
+    background-color: ${Colors.white};
+    color: ${Colors.darkBlue};
+  }
+
+  &.bg-red {
+    background-color: ${Colors.red};
+    color: ${Colors.white};
+  }
+
+  &.full {
+    width: 100%;
+  }
+
+  &.border {
+    border: 1px solid ${Colors.darkBlue};
   }
 `;
 
 // proptypes
 AppButton.propTypes = {
-  type: PropTypes.oneOf(['button', 'link']).isRequired,
-  buttonType: PropTypes.oneOf(['submit', 'reset', 'button']),
-  href: PropTypes.string,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']).isRequired,
   full: PropTypes.bool,
-  white: PropTypes.bool,
+  className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 AppButton.defaultProps = {
-  buttonType: 'button',
-  href: '',
   full: false,
-  white: false,
+  className: '',
   onClick: null,
 };
 
