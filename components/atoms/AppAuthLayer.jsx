@@ -9,7 +9,7 @@ const AppAuthLayer = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    auth.onAuthStateChanged((result) => {
+    const unSubscribe = auth.onAuthStateChanged((result) => {
       if (result) {
         const userAuthData = {
           uid: result.uid,
@@ -26,6 +26,8 @@ const AppAuthLayer = () => {
       }
       setIsLoading(false);
     });
+
+    return () => unSubscribe();
   }, [dispatchAuth]);
 
   return isLoading ? <AppLoading /> : null;
