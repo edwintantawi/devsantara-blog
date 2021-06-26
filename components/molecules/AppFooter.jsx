@@ -43,7 +43,7 @@ const FooterLayout = styled.footer`
   span {
     display: block;
     margin: 0.5rem 0;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 0.8rem;
     @media ${minWidth('md')} {
       margin: 0;
