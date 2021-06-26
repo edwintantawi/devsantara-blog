@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
@@ -12,8 +13,11 @@ const AppLink = ({ title, href, Icon }) => {
   return (
     <Link href={href} passHref>
       <LinkLayout active={active}>
-        <Icon />
-        <TitleLayout active={active}>{title}</TitleLayout>
+        <LinkContent>
+          <Icon />
+          <TitleLayout active={active}>{title}</TitleLayout>
+        </LinkContent>
+        <ArrowRightIcon />
       </LinkLayout>
     </Link>
   );
@@ -22,15 +26,16 @@ const AppLink = ({ title, href, Icon }) => {
 const LinkLayout = styled.a`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
-  padding: 1rem;
-  margin-bottom: 0.8rem;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
   border-radius: 6px;
   text-decoration: none;
   background-color: ${({ active }) =>
     active ? Colors.darkBlue : Colors.white};
   color: ${({ active }) => (active ? Colors.white : Colors.darkBlue)};
-  border-left: 0.35rem solid ${Colors.darkBlue};
+  /* border-left: 0.35rem solid ${Colors.darkBlue}; */
 
   &:hover {
     background-color: ${({ active }) =>
@@ -40,6 +45,15 @@ const LinkLayout = styled.a`
   @media ${minWidth('md')} {
     padding: 0.8rem 1rem;
   }
+
+  .MuiSvgIcon-root {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+`;
+
+const LinkContent = styled.span`
+  display: flex;
 `;
 
 const TitleLayout = styled.div`
