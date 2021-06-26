@@ -50,16 +50,47 @@ const AppNavigation = () => {
     });
   };
 
+  const handleClickLink = () => {
+    dispatchApp({
+      type: ACTION_TYPES.TOGGLE_DRAWER,
+    });
+  };
+
   return (
     <nav>
       <NavLayout active={isActiveNavDrawer}>
-        <AppLink href="/" title="Home" Icon={HomeIcon} />
-        <AppLink href="/guide" title="Guide" Icon={GpsFixedIcon} />
-        <AppLink href="/about" title="About" Icon={GroupIcon} />
+        <AppLink
+          href="/"
+          title="Home"
+          Icon={HomeIcon}
+          onClick={handleClickLink}
+        />
+        <AppLink
+          href="/guide"
+          title="Guide"
+          Icon={GpsFixedIcon}
+          onClick={handleClickLink}
+        />
+        <AppLink
+          href="/about"
+          title="About"
+          Icon={GroupIcon}
+          onClick={handleClickLink}
+        />
         {user && (
-          <AppLink href="/dashboard" title="Dashboard" Icon={DashboardIcon} />
+          <AppLink
+            href="/dashboard"
+            title="Dashboard"
+            Icon={DashboardIcon}
+            onClick={handleClickLink}
+          />
         )}
-        <AppLink href="/settings" title="Settings" Icon={SettingsIcon} />
+        <AppLink
+          href="/settings"
+          title="Settings"
+          Icon={SettingsIcon}
+          onClick={handleClickLink}
+        />
         <HorizontalLine />
         {user ? (
           <AppButton

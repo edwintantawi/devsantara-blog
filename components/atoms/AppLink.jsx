@@ -6,13 +6,13 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
-const AppLink = ({ title, href, Icon }) => {
+const AppLink = ({ title, href, Icon, onClick }) => {
   const router = useRouter();
   const active = router.asPath === href;
 
   return (
     <Link href={href} passHref>
-      <LinkLayout active={active}>
+      <LinkLayout active={active} onClick={onClick}>
         <LinkContent>
           <Icon />
           <TitleLayout active={active}>{title}</TitleLayout>
@@ -66,6 +66,11 @@ AppLink.propTypes = {
   title: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
   Icon: PropTypes.elementType.isRequired,
+  onClick: PropTypes.func,
+};
+
+AppLink.defaultProps = {
+  onClick: null,
 };
 
 export default AppLink;
