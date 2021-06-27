@@ -67,12 +67,6 @@ const AppMenuTextEditor = ({ editor }) => {
         <SubjectIcon />
       </AppButtonTextEditor>
       <AppButtonTextEditor
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        active={editor.isActive('heading', { level: 1 })}
-      >
-        h1
-      </AppButtonTextEditor>
-      <AppButtonTextEditor
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         active={editor.isActive('heading', { level: 2 })}
       >
