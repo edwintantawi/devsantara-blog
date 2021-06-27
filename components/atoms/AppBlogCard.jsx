@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { Avatar } from '@material-ui/core';
 import Colors from '../../styles/colors';
 
-const AppBlogCard = ({ index, data }) => (
+const AppBlogCard = ({ index, url, data }) => (
   <BlogCardLayout>
-    {index === 0 && (
+    {index === -1 && (
       <Image
         src={data.bannerImage}
         alt=""
@@ -21,13 +21,22 @@ const AppBlogCard = ({ index, data }) => (
 
     <BlogCardContent>
       <BlogCardAuthor>
-        <Avatar style={{ width: '2rem', height: '2rem' }} />
+        <Avatar
+          style={{ width: '2rem', height: '2rem' }}
+          src={data.authorPicture}
+        />
         <BlogCardIdentity>
           <span>{data.authorName}</span>
-          <span>{data.timestamp}</span>
+          <span>
+            {
+              new Date(data.timestamp._seconds * 1000)
+                .toISOString()
+                .split('T')[0]
+            }
+          </span>
         </BlogCardIdentity>
       </BlogCardAuthor>
-      <Link href="">
+      <Link href={url}>
         <a>
           <h3>{data.title}</h3>
         </a>
@@ -109,6 +118,7 @@ const BlogCardIdentity = styled.div`
 
 AppBlogCard.propTypes = {
   index: PropTypes.number.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default AppBlogCard;
