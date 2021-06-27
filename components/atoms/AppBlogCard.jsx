@@ -43,7 +43,7 @@ const AppBlogCard = ({ index, url, data }) => (
       </Link>
       <div>
         {data.tags.map((tag) => (
-          <span key={tag.id}>#{tag}</span>
+          <span key={tag.id}>#{tag.title}</span>
         ))}
       </div>
     </BlogCardContent>
