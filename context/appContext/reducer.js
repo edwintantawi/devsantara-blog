@@ -7,6 +7,12 @@ const reducer = (state, action) => {
         ...state,
         isActiveNavDrawer: !state.isActiveNavDrawer,
       };
+
+    case ACTION_TYPES.TOGGLE_LOADING:
+      return {
+        ...state,
+        isLoading: false,
+      };
     default:
       return state;
   }

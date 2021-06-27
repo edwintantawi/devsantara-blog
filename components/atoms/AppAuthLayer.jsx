@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
 import { auth } from '../../lib/firebase';
 import ACTION_TYPES from '../../context/actionTypes';
 import AppLoading from './AppLoading';
+import useAppContext from '../../hooks/useAppContext';
 
 const AppAuthLayer = () => {
   const [, dispatchAuth] = useAuthContext();
-  const [isLoading, setIsLoading] = useState(true);
+  const [{ isLoading }, dispatchApp] = useAppContext();
 
   useEffect(() => {
     const unSubscribe = auth.onAuthStateChanged((result) => {
@@ -22,13 +23,17 @@ const AppAuthLayer = () => {
           type: ACTION_TYPES.SET_AUTH,
           payload: userAuthData,
         });
-        setIsLoading(false);
+        dispatchApp({
+          type: ACTION_TYPES.TOGGLE_LOADING,
+        });
       }
-      setIsLoading(false);
+      dispatchApp({
+        type: ACTION_TYPES.TOGGLE_LOADING,
+      });
     });
 
     return () => unSubscribe();
-  }, [dispatchAuth]);
+  }, [dispatchAuth, dispatchApp]);
 
   return isLoading ? <AppLoading /> : null;
 };
