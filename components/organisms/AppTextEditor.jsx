@@ -8,11 +8,9 @@ import AppButton from '../atoms/AppButton';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 import AppMenuTextEditor from '../molecules/AppMenuTextEditor';
-import useAuthContext from '../../hooks/useAuthContext';
-import firebase, { db } from '../../lib/firebase';
+import { auth } from '../../lib/firebase';
 
 const AppTextEditor = () => {
-  const [{ user }] = useAuthContext();
   const [title, setTitle] = useState();
   const [tags, setTags] = useState();
 
@@ -22,19 +20,22 @@ const AppTextEditor = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const postJson = editor.getJSON();
-    const blogPostData = {
-      author: {
-        name: user.displayName,
-        email: user.email,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      },
-      title,
-      tags,
-      post: postJson,
-    };
+    auth.currentUser.getIdToken(true).then((idToken) => {
+      const postJson = editor.getJSON();
+      const body = {
+        title,
+        tags,
+        postJson,
+      };
 
-    db.collection('blog_post').add(blogPostData);
+      fetch('/api/blogposts', {
+        method: 'POST',
+        headers: {
+          idtoken: idToken,
+        },
+        body: JSON.stringify(body),
+      });
+    });
   };
 
   return (
