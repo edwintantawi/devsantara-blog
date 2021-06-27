@@ -1,5 +1,6 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Placeholder from '@tiptap/extension-placeholder';
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
@@ -7,42 +8,12 @@ import AppMenuTextEditor from '../molecules/AppMenuTextEditor';
 
 const AppTextEditor = () => {
   const editor = useEditor({
-    extensions: [StarterKit],
-    content: `
-    <h1>heading 1</h1>
-    <h2>heading 2</h2>
-    <h3>heading 3</h3>
-    <h4>heading 4</h4>
-    <h5>heading 5</h5>
-    <h6>heading 6</h6>
-    <p>paragraph</p>
-      <ul>
-        <li>
-          That’s a bullet list with one …
-        </li>
-        <li>
-          … or two list items.
-        </li>
-      </ul>
-      <p>
-        Isn’t that great? And all of that is editable. But wait, there’s more. Let’s try a code block:
-      </p>
-      <pre><code class="language-css">body {
-  display: none;
-}</code></pre>
-      <p>
-        I know, I know, this is impressive. It’s only the tip of the iceberg though. Give it a try and click a little bit around. Don’t forget to check the other examples too.
-      </p>
-      <blockquote>
-        Wow, that’s amazing. Good work, boy! 👏
-        <br />
-        — Mom
-      </blockquote>
-    `,
+    extensions: [StarterKit, Placeholder],
   });
   return (
     <EditorEnviroment>
       <AppMenuTextEditor editor={editor} />
+      <InputTitle type="text" placeholder="Title here..." />
       <EditorContent editor={editor} />
     </EditorEnviroment>
   );
@@ -54,6 +25,17 @@ const EditorEnviroment = styled.div`
     border: 1px solid ${Colors.mediumGray};
     padding: 1.5rem;
     border-radius: 8px;
+    overflow: hidden;
+    min-height: 50vh;
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      float: left;
+      color: #cccccc;
+      pointer-events: none;
+      height: 0;
+      font-size: 1.1rem;
+    }
 
     @media ${minWidth('md')} {
       padding: 3rem;
@@ -64,7 +46,9 @@ const EditorEnviroment = styled.div`
     }
 
     * {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      letter-spacing: 1px;
     }
 
     ul,
@@ -78,7 +62,8 @@ const EditorEnviroment = styled.div`
     h4,
     h5,
     h6 {
-      line-height: 1.1;
+      line-height: 1.2;
+      margin-top: 2.5rem;
     }
 
     h1 {
@@ -88,21 +73,24 @@ const EditorEnviroment = styled.div`
       font-size: 2rem;
     }
     h3 {
-      font-size: 1.8rem;
-    }
-    h4 {
-      font-size: 1.6rem;
-    }
-    h5 {
       font-size: 1.4rem;
     }
+    h4 {
+      font-size: 1.3rem;
+    }
+    h5 {
+      font-size: 1.1rem;
+    }
     h6 {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     code {
-      background-color: rgba(#616161, 0.1);
-      color: #616161;
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      background-color: #61616132;
+      color: #424242;
+      font-family: 'JetBrainsMono', monospace;
     }
 
     pre {
@@ -111,13 +99,20 @@ const EditorEnviroment = styled.div`
       font-family: 'JetBrainsMono', monospace;
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
+      max-width: 998px;
+      overflow: auto;
 
       code {
         color: inherit;
         padding: 0;
         background: none;
-        font-size: 0.8rem;
+        font-size: 1rem;
       }
+    }
+
+    hr {
+      height: 1px;
+      background-color: ${Colors.mediumGray};
     }
 
     img {
@@ -127,7 +122,8 @@ const EditorEnviroment = styled.div`
 
     blockquote {
       padding-left: 1rem;
-      border-left: 2px solid rgba(#0d0d0d, 0.1);
+      border-left: 3px solid ${Colors.mediumGray};
+      color: ${Colors.gray};
     }
 
     hr {
@@ -138,4 +134,21 @@ const EditorEnviroment = styled.div`
   }
 `;
 
+const InputTitle = styled.input`
+  width: 100%;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  font-size: 2.625rem;
+  font-weight: 700;
+  border: 1px solid ${Colors.mediumGray};
+
+  @media ${minWidth('md')} {
+    padding: 1rem 3rem;
+  }
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.1);
+  }
+`;
 export default AppTextEditor;
