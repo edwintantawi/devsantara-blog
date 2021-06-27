@@ -1,27 +1,35 @@
 import AppShell from '../components/organisms/AppShell';
 import AppNavigation from '../components/molecules/AppNavigation';
-// import AppBlogCard from '../components/atoms/AppBlogCard';
+import AppBlogCard from '../components/atoms/AppBlogCard';
 
-const Home = () => (
+const Home = ({ posts }) => (
   <AppShell>
     <AppNavigation />
-    {/* <div>
-      {[0, 1, 2, 3, 4, 5].map((id) => (
+    <div>
+      {posts.results.map(({ id, data }, index) => (
         <AppBlogCard
           key={id}
-          index={id}
+          url={`/posts/${id}`}
+          index={index}
           data={{
-            bannerImage: '/assets/dummy-post-banner.jpg',
-            authorName: 'markZuck',
-            timestamp: '02 Jan 2021',
-            title:
-              '30minutes Learn Next JS with firebase to build a blogs apps',
-            tags: ['javascript', 'nextjs', 'reactjs', 'firebase'],
+            bannerImage: data.bannerImage,
+            authorPicture: data.authorPicture,
+            authorName: data.authorName,
+            timestamp: data.timestamp,
+            title: data.title,
+            tags: data.tags,
           }}
         />
       ))}
-    </div> */}
+    </div>
   </AppShell>
 );
+
+export const getStaticProps = async () => {
+  const response = await fetch('http://localhost:3000/api/blogposts');
+  const responseJson = await response.json();
+
+  return { props: { posts: responseJson } };
+};
 
 export default Home;
