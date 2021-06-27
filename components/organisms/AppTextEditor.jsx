@@ -2,26 +2,68 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import styled from 'styled-components';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { useState } from 'react';
+import AppButton from '../atoms/AppButton';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 import AppMenuTextEditor from '../molecules/AppMenuTextEditor';
+import useAuthContext from '../../hooks/useAuthContext';
+import firebase, { db } from '../../lib/firebase';
 
 const AppTextEditor = () => {
+  const [{ user }] = useAuthContext();
+  const [title, setTitle] = useState();
+  const [tags, setTags] = useState();
+
   const editor = useEditor({
     extensions: [StarterKit, Placeholder],
   });
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const postJson = editor.getJSON();
+    const blogPostData = {
+      author: {
+        name: user.displayName,
+        email: user.email,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      },
+      title,
+      tags,
+      post: postJson,
+    };
+
+    db.collection('blog_post').add(blogPostData);
+  };
+
   return (
-    <EditorEnviroment>
+    <EditorEnviroment onSubmit={(e) => handleOnSubmit(e)}>
       <AppMenuTextEditor editor={editor} />
-      <InputTitle type="text" placeholder="Title here..." />
+      <InputTitle
+        type="text"
+        placeholder="Title here..."
+        required
+        onChange={(event) => setTitle(event.target.value)}
+      />
+      <InputTags
+        type="text"
+        placeholder="Tags: javascript, reactjs, html, ..."
+        required
+        onChange={(event) => setTags(event.target.value)}
+      />
       <EditorContent editor={editor} />
+      <AppButton type="submit">
+        <AddCircleOutlineIcon />
+        <span>Create Post</span>
+      </AppButton>
     </EditorEnviroment>
   );
 };
 
-const EditorEnviroment = styled.div`
+const EditorEnviroment = styled.form`
   .ProseMirror {
-    margin-top: 1rem;
+    margin: 1rem 0;
     border: 1px solid ${Colors.mediumGray};
     padding: 1.5rem;
     border-radius: 8px;
@@ -134,14 +176,18 @@ const EditorEnviroment = styled.div`
   }
 `;
 
-const InputTitle = styled.input`
+const BaseInput = styled.input`
   width: 100%;
-  padding: 1rem 1.5rem;
   margin-top: 1rem;
+  border-radius: 8px;
+  border: 1px solid ${Colors.mediumGray};
+`;
+
+const InputTitle = styled(BaseInput)`
+  padding: 1rem 1.5rem;
   border-radius: 8px;
   font-size: 2.625rem;
   font-weight: 700;
-  border: 1px solid ${Colors.mediumGray};
 
   @media ${minWidth('md')} {
     padding: 1rem 3rem;
@@ -149,6 +195,21 @@ const InputTitle = styled.input`
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const InputTags = styled(BaseInput)`
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: ${Colors.gray};
+
+  @media ${minWidth('md')} {
+    padding: 1rem 3rem;
+  }
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.3);
   }
 `;
 export default AppTextEditor;
