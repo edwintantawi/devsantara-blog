@@ -26,7 +26,9 @@ const handler = (req, res) => {
           authorEmail: user.uid,
           timestamp: admin.firestore.FieldValue.serverTimestamp(),
           title: bodyJson.title,
-          tags: bodyJson.tags.split(',').map((tag) => tag.trim()),
+          tags: bodyJson.tags
+            .split(',')
+            .map((tag, index) => ({ id: index, title: tag.trim() })),
           keywords: bodyJson.title.split(' '),
           postJson: bodyJson.postJson,
         };
