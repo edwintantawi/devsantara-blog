@@ -23,10 +23,8 @@ const AppAuthLayer = () => {
           type: ACTION_TYPES.SET_AUTH,
           payload: userAuthData,
         });
-        dispatchApp({
-          type: ACTION_TYPES.TOGGLE_LOADING,
-        });
       }
+
       dispatchApp({
         type: ACTION_TYPES.TOGGLE_LOADING,
       });
