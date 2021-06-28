@@ -25,7 +25,7 @@ const AppTextEditor = () => {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     auth.currentUser.getIdToken(true).then((idToken) => {
       const postJson = editor.getJSON();
       const body = {
@@ -41,10 +41,7 @@ const AppTextEditor = () => {
         },
         body: JSON.stringify(body),
       })
-        .then((result) => {
-          setLoading(true);
-          return result.json();
-        })
+        .then((result) => result.json())
         .then(({ url }) => {
           setTitle('');
           setTags('');
