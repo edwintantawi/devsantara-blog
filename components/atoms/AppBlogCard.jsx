@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styled from 'styled-components';
 import Image from 'next/image';
-import { Avatar } from '@material-ui/core';
 import Colors from '../../styles/colors';
+import AppAuthor from './AppAuthor';
 
 const AppBlogCard = ({ index, url, data }) => (
   <BlogCardLayout>
@@ -20,22 +20,11 @@ const AppBlogCard = ({ index, url, data }) => (
     )}
 
     <BlogCardContent>
-      <BlogCardAuthor>
-        <Avatar
-          style={{ width: '2rem', height: '2rem' }}
-          src={data.authorPicture}
-        />
-        <BlogCardIdentity>
-          <span>{data.authorName}</span>
-          <span>
-            {
-              new Date(data.timestamp._seconds * 1000)
-                .toISOString()
-                .split('T')[0]
-            }
-          </span>
-        </BlogCardIdentity>
-      </BlogCardAuthor>
+      <AppAuthor
+        authorName={data.authorName}
+        timestamp={data.timestamp}
+        authorPicture={data.authorPicture}
+      />
       <Link href={url}>
         <a>
           <h3>{data.title}</h3>
@@ -90,29 +79,6 @@ const BlogCardContent = styled.div`
       color: ${Colors.gray};
       font-size: 0.9rem;
     }
-  }
-`;
-
-const BlogCardAuthor = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const BlogCardIdentity = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-left: 0.6rem;
-
-  span:nth-child(1) {
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: ${Colors.gray};
-  }
-
-  span:nth-child(2) {
-    font-size: 0.7rem;
-    color: ${Colors.gray};
-    margin-top: -3px;
   }
 `;
 
