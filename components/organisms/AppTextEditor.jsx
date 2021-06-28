@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -10,17 +11,21 @@ import minWidth from '../../styles/mediaQuery';
 import AppMenuTextEditor from '../molecules/AppMenuTextEditor';
 import { auth } from '../../lib/firebase';
 import EditorStyle from '../../styles/editorStyle';
+import AppLoader from '../atoms/AppLoader';
 
 const AppTextEditor = () => {
-  const [title, setTitle] = useState();
-  const [tags, setTags] = useState();
+  const [title, setTitle] = useState('');
+  const [tags, setTags] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const editor = useEditor({
     extensions: [StarterKit, Placeholder],
   });
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+
     auth.currentUser.getIdToken(true).then((idToken) => {
       const postJson = editor.getJSON();
       const body = {
@@ -35,39 +40,48 @@ const AppTextEditor = () => {
           idtoken: idToken,
         },
         body: JSON.stringify(body),
-      }).then(() => {
-        setTitle('');
-        setTags('');
-        editor.commands.clearContent();
-      });
+      })
+        .then((result) => {
+          setLoading(true);
+          return result.json();
+        })
+        .then(({ url }) => {
+          setTitle('');
+          setTags('');
+          editor.commands.clearContent();
+          router.push(url);
+        });
     });
   };
 
   return (
-    <form onSubmit={(e) => handleOnSubmit(e)}>
-      <AppMenuTextEditor editor={editor} />
-      <InputTitle
-        type="text"
-        placeholder="Title here..."
-        required
-        onChange={(event) => setTitle(event.target.value)}
-        value={title}
-      />
-      <InputTags
-        type="text"
-        placeholder="Tags: javascript, reactjs, html, ..."
-        required
-        onChange={(event) => setTags(event.target.value)}
-        value={tags}
-      />
-      <EditorStyle>
-        <EditorContent editor={editor} />
-      </EditorStyle>
-      <AppButton type="submit">
-        <AddCircleOutlineIcon />
-        <span>Create Post</span>
-      </AppButton>
-    </form>
+    <>
+      {loading && <AppLoader />}
+      <form onSubmit={(event) => handleOnSubmit(event)}>
+        <AppMenuTextEditor editor={editor} />
+        <InputTitle
+          type="text"
+          placeholder="Title here..."
+          required
+          onChange={(event) => setTitle(event.target.value)}
+          value={title}
+        />
+        <InputTags
+          type="text"
+          placeholder="Tags: javascript, reactjs, html, ..."
+          required
+          onChange={(event) => setTags(event.target.value)}
+          value={tags}
+        />
+        <EditorStyle>
+          <EditorContent editor={editor} />
+        </EditorStyle>
+        <AppButton type="submit">
+          <AddCircleOutlineIcon />
+          <span>Create Post</span>
+        </AppButton>
+      </form>
+    </>
   );
 };
 
