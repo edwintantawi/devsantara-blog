@@ -14,7 +14,7 @@ const AppLink = ({ title, href, Icon, onClick }) => {
     <Link href={href} passHref>
       <LinkLayout active={active} onClick={onClick}>
         <LinkContent>
-          <Icon />
+          <Icon width={30} height={30} />
           <TitleLayout active={active}>{title}</TitleLayout>
         </LinkContent>
         {/* <ArrowRightIcon /> */}
