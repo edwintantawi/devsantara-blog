@@ -40,7 +40,7 @@ const AppBlogCard = ({ index, url, data }) => (
 );
 
 const BlogCardLayout = styled.article`
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   background-color: ${Colors.lightGray};
   border: 1px solid ${Colors.mediumGray};
   border-radius: 6px;

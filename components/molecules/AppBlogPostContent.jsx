@@ -27,7 +27,7 @@ const AppBlogPostContent = ({ blogpost }) => (
 );
 
 const BlogPostHeading = styled.header`
-  padding: 1.5rem 0.5rem;
+  padding: 1.5rem 0.5rem 3rem;
   max-width: 100%;
   @media ${minWidth('md')} {
     padding: 3rem 3rem 0;
@@ -42,9 +42,11 @@ const BlogPostHeading = styled.header`
     margin: 0.5rem 0 1rem;
     span {
       display: inline-block;
-      margin: 0 1rem 0 0;
+      margin: 0 0.5rem 0.5rem 0;
+      padding: 0.2rem 0.5rem;
       color: ${Colors.gray};
-      font-size: 1.2rem;
+      font-size: 1rem;
+      background-color: ${Colors.lightGray};
     }
   }
 `;
