@@ -1,10 +1,8 @@
 import AppShell from '../components/organisms/AppShell';
-import AppNavigation from '../components/molecules/AppNavigation';
 import AppBlogCard from '../components/atoms/AppBlogCard';
 
 const Home = ({ posts }) => (
   <AppShell>
-    <AppNavigation />
     <div>
       {posts.results.map(({ id, data }, index) => (
         <AppBlogCard
