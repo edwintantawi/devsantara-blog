@@ -20,7 +20,7 @@ export const getStaticPaths = async () => {
   const paths = responseJson.results.map(({ id }) => ({ params: { id } }));
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 
