@@ -35,6 +35,7 @@ const BlogPostHeading = styled.header`
 
   & > .title {
     font-size: 3rem;
+    line-height: 1.3;
   }
 
   & > .tags {

@@ -5,7 +5,7 @@ import minWidth from './mediaQuery';
 const EditorStyle = styled.div`
   margin: ${({ view }) => (view ? 0 : '1rem 0')};
   border: ${({ view }) => (view ? 'none' : `1px solid ${Colors.mediumGray}`)};
-  padding: 1.5rem 0.5rem;
+  padding: ${({ view }) => (view ? '0.5rem' : '1.5rem')};
   border-radius: 8px;
   overflow: hidden;
   min-height: 50vh;
