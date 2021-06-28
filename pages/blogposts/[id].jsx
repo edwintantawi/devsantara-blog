@@ -5,7 +5,15 @@ import AppActionBlogPost from '../../components/atoms/AppActionBlogPost';
 import AppBlogPostContent from '../../components/molecules/AppBlogPostContent';
 
 const BlogPost = ({ blogpost }) => (
-  <AppShell noNavigation>
+  <AppShell
+    title={blogpost.title}
+    keywords={`${blogpost.keywords.join(', ')}, ${blogpost.tags
+      .map(({ title }) => title)
+      .join(', ')}`}
+    description={blogpost.htmlContent.split('').splice(0, 100).join('')}
+    url={`blogpost/${blogpost.id}`}
+    noNavigation
+  >
     <AppActionBlogPost />
     <AppBlogPostContent blogpost={blogpost} />
   </AppShell>
