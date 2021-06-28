@@ -11,7 +11,7 @@ import AppNavigation from '../molecules/AppNavigation';
 const AppShell = ({
   children,
   title,
-  keyword,
+  keywords,
   description,
   url,
   noNavigation,
@@ -20,7 +20,7 @@ const AppShell = ({
     <ViewLayout>
       <AppHead
         title={title}
-        keyword={keyword}
+        keywords={keywords}
         description={description}
         url={url}
       />
