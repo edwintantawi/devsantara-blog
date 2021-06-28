@@ -35,6 +35,10 @@ const AppTextEditor = () => {
           idtoken: idToken,
         },
         body: JSON.stringify(body),
+      }).then(() => {
+        setTitle('');
+        setTags('');
+        editor.commands.clearContent();
       });
     });
   };
@@ -47,12 +51,14 @@ const AppTextEditor = () => {
         placeholder="Title here..."
         required
         onChange={(event) => setTitle(event.target.value)}
+        value={title}
       />
       <InputTags
         type="text"
         placeholder="Tags: javascript, reactjs, html, ..."
         required
         onChange={(event) => setTags(event.target.value)}
+        value={tags}
       />
       <EditorStyle>
         <EditorContent editor={editor} />
