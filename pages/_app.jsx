@@ -8,8 +8,9 @@ const MyApp = ({ Component, pageProps }) => (
     <GlobalStyle />
     <AuthContextProvider>
       <AppContextProvider>
-        <AppAuthLayer />
-        <Component {...pageProps} />
+        <AppAuthLayer>
+          <Component {...pageProps} />
+        </AppAuthLayer>
       </AppContextProvider>
     </AuthContextProvider>
   </>

@@ -5,7 +5,7 @@ import ACTION_TYPES from '../../context/actionTypes';
 import AppLoading from './AppLoading';
 import useAppContext from '../../hooks/useAppContext';
 
-const AppAuthLayer = () => {
+const AppAuthLayer = ({ children }) => {
   const [, dispatchAuth] = useAuthContext();
   const [{ isLoading }, dispatchApp] = useAppContext();
 
@@ -33,7 +33,7 @@ const AppAuthLayer = () => {
     return () => unSubscribe();
   }, [dispatchAuth, dispatchApp]);
 
-  return isLoading ? <AppLoading /> : null;
+  return isLoading ? <AppLoading /> : children;
 };
 
 export default AppAuthLayer;
