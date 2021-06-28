@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AppHead from '../atoms/AppHead';
 import AppHeader from '../molecules/AppHeader';
@@ -5,8 +6,16 @@ import AppWrapper from '../atoms/AppWrapper';
 import AppFooter from '../molecules/AppFooter';
 import { appHeadPropTypes } from '../../porpTypes/appHead.proptypes';
 import minWidth from '../../styles/mediaQuery';
+import AppNavigation from '../molecules/AppNavigation';
 
-const AppShell = ({ children, title, keyword, description, url }) => (
+const AppShell = ({
+  children,
+  title,
+  keyword,
+  description,
+  url,
+  noNavigation,
+}) => (
   <RootLayout>
     <ViewLayout>
       <AppHead
@@ -17,7 +26,10 @@ const AppShell = ({ children, title, keyword, description, url }) => (
       />
       <AppHeader />
       <AppWrapper>
-        <MainLayout>{children}</MainLayout>
+        <MainLayout>
+          <AppNavigation noNavigation={noNavigation} />
+          {children}
+        </MainLayout>
       </AppWrapper>
     </ViewLayout>
     <AppFooter />
@@ -39,12 +51,16 @@ const MainLayout = styled.main`
   grid-template-columns: 1fr;
   column-gap: 32px;
   padding: 1.5rem 0;
+  box-sizing: border-box;
 
   @media ${minWidth('md')} {
     grid-template-columns: auto 1fr;
   }
 `;
 
-AppShell.propTypes = appHeadPropTypes;
+AppShell.propTypes = { ...appHeadPropTypes, noNavigation: PropTypes.bool };
+AppShell.defaultProps = {
+  noNavigation: false,
+};
 
 export default AppShell;
