@@ -2,7 +2,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+// import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
@@ -17,7 +17,7 @@ const AppLink = ({ title, href, Icon, onClick }) => {
           <Icon />
           <TitleLayout active={active}>{title}</TitleLayout>
         </LinkContent>
-        <ArrowRightIcon />
+        {/* <ArrowRightIcon /> */}
       </LinkLayout>
     </Link>
   );
@@ -32,14 +32,16 @@ const LinkLayout = styled.a`
   margin-bottom: 0.5rem;
   border-radius: 6px;
   text-decoration: none;
-  background-color: ${({ active }) =>
-    active ? Colors.darkBlue : Colors.white};
-  color: ${({ active }) => (active ? Colors.white : Colors.darkBlue)};
+  /* background-color: ${({ active }) =>
+    active ? Colors.darkBlue : Colors.white}; */
+  background-color: ${Colors.white};
+  color: ${Colors.darkBlue};
+  /* color: ${({ active }) => (active ? Colors.white : Colors.darkBlue)}; */
   /* border-left: 0.35rem solid ${Colors.darkBlue}; */
+  font-weight: ${({ active }) => active && 'bold'};
 
   &:hover {
-    background-color: ${({ active }) =>
-      active ? Colors.darkBlue : 'rgba(0, 18, 39,0.05)'};
+    background-color: rgba(0, 18, 39, 0.05);
   }
 
   @media ${minWidth('md')} {
