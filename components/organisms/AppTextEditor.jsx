@@ -29,7 +29,7 @@ const AppTextEditor = () => {
         postJson,
       };
 
-      fetch('/api/blogposts', {
+      fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts`, {
         method: 'POST',
         headers: {
           idtoken: idToken,

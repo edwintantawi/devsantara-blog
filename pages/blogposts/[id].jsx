@@ -12,7 +12,9 @@ const BlogPost = ({ blogpost }) => (
 );
 
 export const getStaticPaths = async () => {
-  const response = await fetch('http://localhost:3000/api/blogposts');
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts`
+  );
   const responseJson = await response.json();
 
   const paths = responseJson.results.map(({ id }) => ({ params: { id } }));
@@ -23,7 +25,9 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params: { id } }) => {
-  const response = await fetch(`http://localhost:3000/api/blogposts/${id}`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts/${id}`
+  );
   const responseJson = await response.json();
 
   return {

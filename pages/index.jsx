@@ -24,7 +24,9 @@ const Home = ({ posts }) => (
 );
 
 export const getStaticProps = async () => {
-  const response = await fetch('http://localhost:3000/api/blogposts');
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts`
+  );
   const responseJson = await response.json();
 
   return { props: { posts: responseJson } };
