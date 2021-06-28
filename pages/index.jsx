@@ -9,7 +9,7 @@ const Home = ({ posts }) => (
       {posts.results.map(({ id, data }, index) => (
         <AppBlogCard
           key={id}
-          url={`/posts/${id}`}
+          url={`/blogposts/${id}`}
           index={index}
           data={{
             bannerImage: data.bannerImage,
