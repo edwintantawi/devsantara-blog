@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import AppShell from '../components/organisms/AppShell';
-import AppNavigation from '../components/molecules/AppNavigation';
 import AppTextEditor from '../components/organisms/AppTextEditor';
 import useAuthContext from '../hooks/useAuthContext';
 import useAppContext from '../hooks/useAppContext';
@@ -16,7 +15,6 @@ const Dashboard = () => {
 
   return (
     <AppShell>
-      <AppNavigation />
       <AppTextEditor />
     </AppShell>
   );
