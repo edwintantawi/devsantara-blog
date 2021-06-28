@@ -16,7 +16,7 @@ import useAuthContext from '../../hooks/useAuthContext';
 import { auth, googleAuthProvider, localPersistence } from '../../lib/firebase';
 import ACTION_TYPES from '../../context/actionTypes';
 
-const AppNavigation = () => {
+const AppNavigation = ({ noNavigation }) => {
   const [{ user }, dispatchAuth] = useAuthContext();
   const [{ isActiveNavDrawer }, dispatchApp] = useAppContext();
 
@@ -57,7 +57,7 @@ const AppNavigation = () => {
   };
 
   return (
-    <nav>
+    <NavWrapper noNavigation={noNavigation}>
       <NavLayout active={isActiveNavDrawer}>
         <AppLink
           href="/"
@@ -116,9 +116,15 @@ const AppNavigation = () => {
         active={isActiveNavDrawer}
         onClick={handleClickNavigationLayer}
       />
-    </nav>
+    </NavWrapper>
   );
 };
+
+const NavWrapper = styled.nav`
+  @media ${minWidth('md')} {
+    display: ${({ noNavigation }) => (noNavigation ? 'none' : 'block')};
+  }
+`;
 
 const NavLayout = styled.div`
   position: fixed;
@@ -140,7 +146,7 @@ const NavLayout = styled.div`
   @media ${minWidth('md')} {
     position: sticky;
     top: 93px;
-    width: 17.5rem;
+    width: 15rem;
     padding: 0;
     border: none;
     box-shadow: none;
