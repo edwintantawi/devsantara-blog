@@ -2,14 +2,12 @@ import { generateHTML } from '@tiptap/html';
 import StarterKit from '@tiptap/starter-kit';
 import AppShell from '../../components/organisms/AppShell';
 import AppActionBlogPost from '../../components/atoms/AppActionBlogPost';
-import EditorStyle from '../../styles/editorStyle';
+import AppBlogPostContent from '../../components/molecules/AppBlogPostContent';
 
 const BlogPost = ({ blogpost }) => (
-  <AppShell>
+  <AppShell noNavigation>
     <AppActionBlogPost />
-    <EditorStyle>
-      <main dangerouslySetInnerHTML={{ __html: blogpost.htmlContent }} />
-    </EditorStyle>
+    <AppBlogPostContent blogpost={blogpost} />
   </AppShell>
 );
 
