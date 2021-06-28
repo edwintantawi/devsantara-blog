@@ -3,14 +3,18 @@ import Colors from './colors';
 import minWidth from './mediaQuery';
 
 const EditorStyle = styled.div`
-  margin: 1rem 0;
-  border: 1px solid ${Colors.mediumGray};
-  padding: 1.5rem;
+  margin: ${({ view }) => (view ? 0 : '1rem 0')};
+  border: ${({ view }) => (view ? 'none' : `1px solid ${Colors.mediumGray}`)};
+  padding: 1.5rem 0.5rem;
   border-radius: 8px;
   overflow: hidden;
   min-height: 50vh;
 
-  *:first-child {
+  @media ${minWidth('md')} {
+    padding: 3rem;
+  }
+
+  .ProseMirror {
     margin: 0;
   }
 
@@ -23,15 +27,16 @@ const EditorStyle = styled.div`
     font-size: 1.1rem;
   }
 
-  @media ${minWidth('md')} {
-    padding: 3rem;
-  }
-
   * {
     font-size: 1.1rem;
-    line-height: 1.7;
+    line-height: 2;
     letter-spacing: 1px;
     margin-top: 1rem;
+  }
+
+  & > *:first-child,
+  & > div > .ProseMirror > *:first-child {
+    margin: 0;
   }
 
   ul,
@@ -39,7 +44,6 @@ const EditorStyle = styled.div`
     padding: 0 1rem;
   }
 
-  h1,
   h2,
   h3,
   h4,
@@ -49,23 +53,24 @@ const EditorStyle = styled.div`
     margin-top: 2.5rem;
   }
 
-  h1 {
-    font-size: 2.625rem;
-  }
   h2 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
   h3 {
     font-size: 1.4rem;
+    font-weight: 600;
   }
   h4 {
     font-size: 1.3rem;
+    font-weight: 600;
   }
   h5 {
     font-size: 1.1rem;
+    font-weight: 600;
   }
   h6 {
     font-size: 1rem;
+    font-weight: 600;
   }
 
   code {
