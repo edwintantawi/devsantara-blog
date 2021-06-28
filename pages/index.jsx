@@ -23,7 +23,7 @@ const Home = ({ posts }) => (
   </AppShell>
 );
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts`
   );
