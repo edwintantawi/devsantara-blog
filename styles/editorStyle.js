@@ -16,6 +16,13 @@ const EditorStyle = styled.div`
 
   .ProseMirror {
     margin: 0;
+    & > * {
+      margin-top: 1rem;
+    }
+  }
+
+  & > * {
+    margin-top: 1rem;
   }
 
   p.is-editor-empty:first-child::before {
@@ -31,7 +38,6 @@ const EditorStyle = styled.div`
     font-size: 1.1rem;
     line-height: 2;
     letter-spacing: 1px;
-    margin-top: 1rem;
   }
 
   & > *:first-child,
@@ -54,22 +60,22 @@ const EditorStyle = styled.div`
   }
 
   h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
   h3 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     font-weight: 600;
   }
   h4 {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: 600;
   }
   h5 {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 600;
   }
   h6 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 600;
   }
 
