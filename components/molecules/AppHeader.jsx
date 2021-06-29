@@ -10,6 +10,7 @@ import minWidth from '../../styles/mediaQuery';
 import useAuthContext from '../../hooks/useAuthContext';
 import useAppContext from '../../hooks/useAppContext';
 import ACTION_TYPES from '../../context/actionTypes';
+import AppAuthButton from './AppAuthButton';
 
 const AppHeader = () => {
   const [{ user }] = useAuthContext();
@@ -24,16 +25,19 @@ const AppHeader = () => {
     <Header>
       <AppWrapper>
         <HeaderWrapper>
-          <AppLogo />
-          <HeaderAction>
-            {user && (
-              <IconButton>
-                <Avatar src={user.photoURL} />
-              </IconButton>
-            )}
+          <HeaderLeft>
             <MenuButton type="button" onClick={handleToggleNav}>
               {isActiveNavDrawer ? <CloseIcon /> : <MenuIcon />}
             </MenuButton>
+            <AppLogo />
+          </HeaderLeft>
+          <HeaderAction>
+            <HideOnMobile>
+              <AppAuthButton />
+            </HideOnMobile>
+            <IconButton>
+              <Avatar src={user?.photoURL} />
+            </IconButton>
           </HeaderAction>
         </HeaderWrapper>
       </AppWrapper>
@@ -53,6 +57,11 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0.8rem 0;
+`;
+
+const HeaderLeft = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const HeaderAction = styled.div`
@@ -80,10 +89,17 @@ const HeaderAction = styled.div`
   }
 `;
 
+const HideOnMobile = styled.div`
+  display: none;
+  @media ${minWidth('md')} {
+    display: block;
+  }
+`;
+
 const MenuButton = styled.button`
   display: flex;
   align-items: center;
-  margin-left: 1rem;
+  margin-right: 1rem;
   background: none;
 
   .MuiSvgIcon-root {
