@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
-const AppButton = ({ children, type, full, className, onClick }) => (
-  <Button type={type} full={full} className={className} onClick={onClick}>
+const AppButton = ({ children, type, className, onClick }) => (
+  <Button type={type} className={className} onClick={onClick}>
     {children}
   </Button>
 );
@@ -18,7 +18,7 @@ const Button = styled.button`
   width: max-content;
   border-radius: 6px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.8rem;
   letter-spacing: 1px;
   cursor: pointer;
@@ -26,11 +26,17 @@ const Button = styled.button`
   color: ${Colors.white};
 
   @media ${minWidth('md')} {
-    padding: 0.8rem 2rem;
+    padding: 0.6rem 2rem;
+  }
+
+  &.large {
+    @media ${minWidth('md')} {
+      padding: 0.9rem 2rem;
+    }
   }
 
   span {
-    margin-left: 0.3rem;
+    margin-left: 0.5rem;
     font-weight: inherit;
     font-size: inherit;
   }
@@ -63,13 +69,11 @@ const Button = styled.button`
 // proptypes
 AppButton.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']).isRequired,
-  full: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 AppButton.defaultProps = {
-  full: false,
   className: '',
   onClick: null,
 };
