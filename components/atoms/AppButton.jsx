@@ -22,6 +22,8 @@ const Button = styled.button`
   font-size: 0.8rem;
   letter-spacing: 1px;
   cursor: pointer;
+  background-color: ${Colors.darkBlue};
+  color: ${Colors.white};
 
   @media ${minWidth('md')} {
     padding: 0.8rem 2rem;
