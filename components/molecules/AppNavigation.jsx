@@ -79,7 +79,7 @@ const AppNavigation = ({ noNavigation }) => {
 };
 
 const NavWrapper = styled.nav`
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     display: ${({ noNavigation }) => (noNavigation ? 'none' : 'block')};
   }
 `;
@@ -105,7 +105,7 @@ const NavLayout = styled.div`
   visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
   transition: 300ms ease-in-out;
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     position: sticky;
     top: 93px;
     width: 18rem;
@@ -126,7 +126,7 @@ const HorizontalLine = styled.hr`
 `;
 
 const HideOnDesktop = styled.div`
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     display: none;
   }
 `;
@@ -140,7 +140,7 @@ const NavigationLayer = styled.div`
   background-color: rgba(0, 0, 0, 0);
   display: ${({ active }) => (active ? 'block' : 'none')};
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     display: none;
   }
 `;

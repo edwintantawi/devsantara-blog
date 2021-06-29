@@ -29,7 +29,8 @@ const AppBlogPostContent = ({ blogpost }) => (
 const BlogPostHeading = styled.header`
   padding: 1.5rem 0.5rem 3rem;
   max-width: 100%;
-  @media ${minWidth('md')} {
+
+  ${minWidth('md')} {
     padding: 3rem 3rem 0;
   }
 
@@ -40,6 +41,7 @@ const BlogPostHeading = styled.header`
 
   & > .tags {
     margin: 0.5rem 0 1rem;
+
     span {
       display: inline-block;
       margin: 0 0.5rem 0.5rem 0;

@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    @media ${minWidth('md')} {
+    ${minWidth('md')} {
       font-size: 16px;
     }
   }

@@ -45,7 +45,7 @@ const FooterLayout = styled.footer`
     margin: 0.5rem 0;
     font-weight: 400;
     font-size: 0.8rem;
-    @media ${minWidth('md')} {
+    ${minWidth('md')} {
       margin: 0;
     }
   }
@@ -57,7 +57,7 @@ const FlexLayout = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     flex-direction: row;
   }
 `;

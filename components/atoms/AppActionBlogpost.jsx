@@ -29,7 +29,7 @@ const ActionBlogPostLayout = styled.div`
   background-color: ${Colors.white};
   height: max-content;
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     display: flex;
     flex-direction: column;
     position: sticky;
@@ -40,7 +40,8 @@ const ActionBlogPostLayout = styled.div`
 
   button {
     margin-bottom: 0;
-    @media ${minWidth('md')} {
+
+    ${minWidth('md')} {
       margin-bottom: 1.5rem;
     }
 

@@ -25,12 +25,12 @@ const Button = styled.button`
   background-color: ${Colors.darkBlue};
   color: ${Colors.white};
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     padding: 0.6rem 2rem;
   }
 
   &.large {
-    @media ${minWidth('md')} {
+    ${minWidth('md')} {
       padding: 0.9rem 2rem;
     }
   }

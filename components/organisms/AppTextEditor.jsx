@@ -41,7 +41,7 @@ const AppTextEditor = () => {
       if (response.status === 201) {
         const responseJson = await response.json();
         const { url } = responseJson;
-        router.push(url);
+        await router.push(url);
       } else {
         setError(true);
       }
@@ -118,7 +118,7 @@ const InputTitle = styled(BaseInput)`
   font-size: 2.625rem;
   font-weight: 700;
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     padding: 1rem 3rem;
   }
 
@@ -133,7 +133,7 @@ const InputTags = styled(BaseInput)`
   letter-spacing: 1px;
   color: ${Colors.gray};
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     padding: 1rem 3rem;
   }
 

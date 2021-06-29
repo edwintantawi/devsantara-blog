@@ -53,7 +53,7 @@ const MainLayout = styled.main`
   padding: 1.5rem 0;
   box-sizing: border-box;
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     grid-template-columns: auto 1fr;
   }
 `;

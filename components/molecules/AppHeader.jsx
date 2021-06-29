@@ -91,7 +91,7 @@ const HeaderAction = styled.div`
 
 const HideOnMobile = styled.div`
   display: none;
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     display: block;
   }
 `;
@@ -107,7 +107,7 @@ const MenuButton = styled.button`
     font-size: 30px;
   }
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     display: none;
   }
 `;

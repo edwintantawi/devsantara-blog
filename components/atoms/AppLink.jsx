@@ -40,7 +40,7 @@ const LinkLayout = styled.a`
     background-color: rgba(0, 18, 39, 0.05);
   }
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     padding: 0.8rem 1rem;
   }
 

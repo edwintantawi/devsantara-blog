@@ -10,7 +10,7 @@ const EditorStyle = styled.div`
   overflow: hidden;
   min-height: 50vh;
 
-  @media ${minWidth('md')} {
+  ${minWidth('md')} {
     padding: 3rem;
   }
 
