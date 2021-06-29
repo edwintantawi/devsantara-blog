@@ -17,11 +17,39 @@ const AppTextEditor = () => {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const router = useRouter();
 
   const editor = useEditor({
     extensions: [StarterKit, Placeholder],
   });
+
+  const postBlogpost = async (idToken, body) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        idtoken: idToken,
+      },
+      body: JSON.stringify(body),
+    };
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts`,
+        options
+      );
+      if (response.status === 201) {
+        const responseJson = await response.json();
+        const { url } = responseJson;
+        router.push(url);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setLoading(false);
+      setError(true);
+    }
+  };
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -33,27 +61,22 @@ const AppTextEditor = () => {
         tags,
         postJson,
       };
-
-      fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts`, {
-        method: 'POST',
-        headers: {
-          idtoken: idToken,
-        },
-        body: JSON.stringify(body),
-      })
-        .then((result) => result.json())
-        .then(({ url }) => {
-          setTitle('');
-          setTags('');
-          editor.commands.clearContent();
-          router.push(url);
-        });
+      postBlogpost(idToken, body);
     });
   };
 
   return (
     <>
-      {loading && <AppLoader />}
+      {loading && (
+        <AppLoader type="loading" message="showing all over the world" />
+      )}
+      {error && (
+        <AppLoader
+          type="error"
+          message="Ooops somethings wrong..."
+          onClick={() => setError(false)}
+        />
+      )}
       <form onSubmit={(event) => handleOnSubmit(event)}>
         <AppMenuTextEditor editor={editor} />
         <InputTitle
