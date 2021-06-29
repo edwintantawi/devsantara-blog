@@ -1,8 +1,8 @@
 import { generateHTML } from '@tiptap/html';
 import StarterKit from '@tiptap/starter-kit';
 import AppShell from '../../components/organisms/AppShell';
-import AppActionBlogPost from '../../components/atoms/AppActionBlogPost';
-import AppBlogPostContent from '../../components/molecules/AppBlogPostContent';
+import AppActionBlogpost from '../../components/atoms/AppActionBlogpost';
+import AppBlogpostContent from '../../components/molecules/AppBlogpostContent';
 
 const BlogPost = ({ blogpost }) => (
   <AppShell
@@ -14,8 +14,8 @@ const BlogPost = ({ blogpost }) => (
     url={`blogpost/${blogpost.id}`}
     noNavigation
   >
-    <AppActionBlogPost />
-    <AppBlogPostContent blogpost={blogpost} />
+    <AppActionBlogpost />
+    <AppBlogpostContent blogpost={blogpost} />
   </AppShell>
 );
 
