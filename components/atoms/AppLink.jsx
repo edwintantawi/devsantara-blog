@@ -14,7 +14,7 @@ const AppLink = ({ title, href, Icon, onClick }) => {
     <Link href={href} passHref>
       <LinkLayout active={active} onClick={onClick}>
         <LinkContent>
-          <Icon width={30} height={30} />
+          <Icon />
           <TitleLayout active={active}>{title}</TitleLayout>
         </LinkContent>
         {/* <ArrowRightIcon /> */}
@@ -32,12 +32,8 @@ const LinkLayout = styled.a`
   margin-bottom: 0.5rem;
   border-radius: 6px;
   text-decoration: none;
-  /* background-color: ${({ active }) =>
-    active ? Colors.darkBlue : Colors.white}; */
   background-color: ${Colors.white};
   color: ${Colors.darkBlue};
-  /* color: ${({ active }) => (active ? Colors.white : Colors.darkBlue)}; */
-  /* border-left: 0.35rem solid ${Colors.darkBlue}; */
   font-weight: ${({ active }) => active && 'bold'};
 
   &:hover {
@@ -49,18 +45,19 @@ const LinkLayout = styled.a`
   }
 
   .MuiSvgIcon-root {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.8rem;
+    height: 1.8rem;
   }
 `;
 
 const LinkContent = styled.span`
   display: flex;
+  align-items: center;
 `;
 
 const TitleLayout = styled.div`
-  margin-left: 0.4rem;
-  font-size: 0.9rem;
+  margin-left: 0.8rem;
+  font-size: 1rem;
   font-weight: ${({ active }) => (active ? 700 : 500)};
 `;
 
