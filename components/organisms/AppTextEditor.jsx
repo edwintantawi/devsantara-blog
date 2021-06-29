@@ -96,7 +96,7 @@ const AppTextEditor = () => {
         <EditorStyle>
           <EditorContent editor={editor} />
         </EditorStyle>
-        <AppButton type="submit">
+        <AppButton type="submit" className="large">
           <AddCircleOutlineIcon />
           <span>Create Post</span>
         </AppButton>
