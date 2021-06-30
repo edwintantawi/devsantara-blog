@@ -77,68 +77,97 @@ const AppTextEditor = () => {
           onClick={() => setError(false)}
         />
       )}
-      <form onSubmit={(event) => handleOnSubmit(event)}>
+      <div>
         <AppMenuTextEditor editor={editor} />
-        <InputTitle
-          type="text"
-          placeholder="Title here..."
-          required
-          onChange={(event) => setTitle(event.target.value)}
-          value={title}
-        />
-        <InputTags
-          type="text"
-          placeholder="Tags: javascript, reactjs, html, ..."
-          required
-          onChange={(event) => setTags(event.target.value)}
-          value={tags}
-        />
-        <EditorStyle>
-          <EditorContent editor={editor} />
-        </EditorStyle>
-        <AppButton type="submit" className="large">
-          <AddCircleOutlineIcon />
-          <span>Create Post</span>
-        </AppButton>
-      </form>
+        <FormLayout onSubmit={(event) => handleOnSubmit(event)}>
+          <EditorLayout>
+            <InputTitle
+              type="text"
+              placeholder="Title here..."
+              required
+              onChange={(event) => setTitle(event.target.value)}
+              value={title}
+            />
+            <InputTags
+              type="text"
+              placeholder="Tags: javascript, reactjs, html, ..."
+              required
+              onChange={(event) => setTags(event.target.value)}
+              value={tags}
+            />
+            <EditorStyle>
+              <EditorContent editor={editor} />
+            </EditorStyle>
+          </EditorLayout>
+          <EditorAction>
+            <AppButton type="submit" className="large">
+              <AddCircleOutlineIcon />
+              <span>Create Post</span>
+            </AppButton>
+          </EditorAction>
+        </FormLayout>
+      </div>
     </>
   );
 };
 
+const EditorLayout = styled.div`
+  border: 1px solid ${Colors.mediumGray};
+  margin-top: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+
+  ${minWidth('md')} {
+    margin-top: 16px;
+    border-radius: 6px;
+  }
+`;
+
+const FormLayout = styled.form``;
+
 const BaseInput = styled.input`
   width: 100%;
-  margin-top: 1rem;
-  border-radius: 8px;
-  border: 1px solid ${Colors.mediumGray};
+  padding: 8px 20px;
+
+  ${minWidth('md')} {
+    padding: 8px 48px;
+  }
 `;
 
 const InputTitle = styled(BaseInput)`
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  font-size: 2.625rem;
+  padding-top: 32px;
+  font-size: 30px;
   font-weight: 700;
-
-  ${minWidth('md')} {
-    padding: 1rem 3rem;
-  }
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.1);
   }
+
+  ${minWidth('md')} {
+    font-size: 48px;
+  }
 `;
 
 const InputTags = styled(BaseInput)`
-  padding: 1rem 1.5rem;
-  font-size: 0.9rem;
+  font-size: 12px;
   letter-spacing: 1px;
   color: ${Colors.gray};
 
-  ${minWidth('md')} {
-    padding: 1rem 3rem;
-  }
-
   &::placeholder {
     color: rgba(0, 0, 0, 0.3);
+  }
+
+  ${minWidth('md')} {
+    font-size: 14px;
+  }
+`;
+
+const EditorAction = styled.div`
+  padding: 0 16px;
+  display: flex;
+  justify-content: flex-end;
+  ${minWidth('md')} {
+    padding: 0;
   }
 `;
 export default AppTextEditor;

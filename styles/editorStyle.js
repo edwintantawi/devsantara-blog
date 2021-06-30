@@ -3,79 +3,90 @@ import Colors from './colors';
 import minWidth from './mediaQuery';
 
 const EditorStyle = styled.div`
-  margin: ${({ view }) => (view ? 0 : '1rem 0')};
-  border: ${({ view }) => (view ? 'none' : `1px solid ${Colors.mediumGray}`)};
-  padding: ${({ view }) => (view ? '0.5rem' : '1.5rem')};
-  border-radius: 8px;
+  padding: ${({ view }) => (view ? '12px' : '48px 20px')};
   overflow: hidden;
   min-height: 50vh;
+  background-color: ${Colors.white};
 
   ${minWidth('md')} {
-    padding: 3rem;
-  }
-
-  .ProseMirror {
-    margin: 0;
-    & > * {
-      margin-top: 1rem;
-    }
-  }
-
-  & > * {
-    margin-top: 1rem;
-  }
-
-  p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: #cccccc;
-    pointer-events: none;
-    height: 0;
-    font-size: 1.1rem;
+    padding: 48px;
   }
 
   * {
-    font-size: 1.1rem;
     line-height: 2;
     letter-spacing: 1px;
   }
 
-  & > *:first-child,
-  & > div > .ProseMirror > *:first-child {
-    margin: 0;
-  }
+  & > *,
+  .ProseMirror {
+    & > * {
+      margin-bottom: 32px;
+    }
 
-  ul,
-  ol {
-    padding: 0 1rem;
-  }
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      float: left;
+      color: #cccccc;
+      pointer-events: none;
+      height: 0;
+    }
 
+    p,
+    p.is-editor-empty:first-child::before {
+      font-size: 14px;
+
+      ${minWidth('md')} {
+        font-size: 18px;
+      }
+    }
+
+    ul,
+    ol {
+      padding: 0 16px;
+    }
+  
   h2,
   h3,
   h4,
   h5,
   h6 {
+    margin: 8px 0;
     line-height: 1.2;
-    margin-top: 2.5rem;
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 27.5px;
+
+    ${minWidth('md')} {
+      font-size: 30px;
+    }
   }
   h3 {
-    font-size: 1.8rem;
+    font-size: 22.5px;
     font-weight: 600;
+
+    ${minWidth('md')} {
+      font-size: 25px;
+    }
   }
   h4 {
-    font-size: 1.6rem;
+    font-size: 17.5px;
     font-weight: 600;
+
+    ${minWidth('md')} {
+      font-size: 20px;
+    }
   }
   h5 {
-    font-size: 1.4rem;
+    font-size: 12.5px;
     font-weight: 600;
+
+    ${minWidth('md')} {
+      font-size: 15px;
+    }
   }
   h6 {
-    font-size: 1.2rem;
+    font-size: 10px;
     font-weight: 600;
   }
 

@@ -29,7 +29,7 @@ const AppFooter = () => {
 };
 
 const FooterLayout = styled.footer`
-  padding: 1.5rem;
+  padding: 24px 16px 80px;
   background-color: ${Colors.darkBlue};
   color: ${Colors.white};
   text-align: center;

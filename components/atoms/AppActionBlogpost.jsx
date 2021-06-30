@@ -22,32 +22,40 @@ const AppActionBlogPost = () => (
 
 const ActionBlogPostLayout = styled.div`
   display: flex;
-  flex-direction: row;
-  position: sticky;
-  top: 4.3rem;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  bottom: 0;
   z-index: 5;
   background-color: ${Colors.white};
-  height: max-content;
+  border-top: 1px solid ${Colors.mediumGray};
+  box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.1);
 
   ${minWidth('md')} {
     display: flex;
     flex-direction: column;
     position: sticky;
-    top: 7.5rem;
+    top: 120px;
     height: max-content;
-    margin-top: 3rem;
+    margin-top: 60px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
   }
 
   button {
     margin-bottom: 0;
+    padding: 6px;
 
     ${minWidth('md')} {
-      margin-bottom: 1.5rem;
+      margin-bottom: 32px;
     }
 
     .MuiSvgIcon-root {
-      width: 2rem;
-      height: 2rem;
+      width: 28px;
+      height: 28px;
     }
   }
 `;

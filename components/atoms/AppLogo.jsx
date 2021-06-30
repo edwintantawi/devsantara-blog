@@ -15,8 +15,8 @@ const AppLogo = () => (
 const Wrapper = styled.a`
   display: flex;
   img {
-    width: 2.375rem;
-    height: 2.6875rem;
+    width: auto;
+    height: 40px;
   }
 `;
 

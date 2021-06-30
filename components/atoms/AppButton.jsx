@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Colors from '../../styles/colors';
-import minWidth from '../../styles/mediaQuery';
 
 const AppButton = ({ children, type, className, onClick }) => (
   <Button type={type} className={className} onClick={onClick}>
@@ -14,37 +13,26 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.1rem 2rem;
+  padding: 0 32px;
+  height: 40px;
   width: max-content;
-  border-radius: 6px;
+  border-radius: 4px;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.8rem;
   letter-spacing: 1px;
   cursor: pointer;
   background-color: ${Colors.darkBlue};
   color: ${Colors.white};
 
-  ${minWidth('md')} {
-    padding: 0.6rem 2rem;
-  }
-
-  &.large {
-    ${minWidth('md')} {
-      padding: 0.9rem 2rem;
-    }
-  }
-
   span {
-    margin-left: 0.5rem;
+    margin-left: 8px;
     font-weight: inherit;
-    font-size: inherit;
+    font-size: 14px;
   }
 
   img,
   .MuiSvgIcon-root {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 16px;
+    height: 16px;
   }
 
   &.bg-white {

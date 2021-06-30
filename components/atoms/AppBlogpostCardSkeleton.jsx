@@ -1,6 +1,7 @@
 import { Avatar } from '@material-ui/core';
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
+import minWidth from '../../styles/mediaQuery';
 
 const AppBlogCardSkeleton = () => (
   <BlogCardLayout>
@@ -26,11 +27,15 @@ const AppBlogCardSkeleton = () => (
 );
 
 const BlogCardLayout = styled.article`
-  margin-bottom: 0.8rem;
-  background-color: ${Colors.lightGray};
+  margin: 8px 8px 0;
+  background-color: ${Colors.white};
   border: 1px solid ${Colors.mediumGray};
   border-radius: 6px;
   overflow: hidden;
+
+  ${minWidth('md')} {
+    margin: 0 0 12px;
+  }
 
   .image {
     width: 100%;
@@ -40,11 +45,11 @@ const BlogCardLayout = styled.article`
 `;
 
 const BlogCardContent = styled.div`
-  padding: 1rem 1.5rem 1.5rem;
+  padding: 16px 24px 24px;
 
   .h3 {
     display: block;
-    margin-top: 1rem;
+    margin-top: 12px;
 
     span {
       display: block;

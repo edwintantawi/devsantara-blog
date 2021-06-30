@@ -16,6 +16,7 @@ import RedoIcon from '@material-ui/icons/Redo';
 import styled from 'styled-components';
 import AppButtonTextEditor from '../atoms/AppButtonTextEditor';
 import Colors from '../../styles/colors';
+import minWidth from '../../styles/mediaQuery';
 
 const AppMenuTextEditor = ({ editor }) => {
   if (!editor) {
@@ -151,12 +152,18 @@ const AppMenuTextEditor = ({ editor }) => {
 const MenuLayout = styled.div`
   position: sticky;
   z-index: 2;
-  top: 4.25rem;
+  top: 60px;
+  justify-content: center;
   display: flex;
+  padding: 12px 0;
   flex-wrap: wrap;
   background-color: ${Colors.white};
-  padding: 1rem 0 0.5rem;
-  border-bottom: 1px solid ${Colors.mediumGray};
+  border: 1px solid ${Colors.mediumGray};
+
+  ${minWidth('md')} {
+    padding: 9px 13px;
+    border-radius: 6px;
+  }
 `;
 
 export default AppMenuTextEditor;

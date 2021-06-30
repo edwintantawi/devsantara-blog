@@ -37,7 +37,7 @@ const AppAuthButton = () => {
     return (
       <AppButton type="button" className="bg-red full" onClick={handleLogout}>
         <ExitToAppIcon />
-        <span>Logout</span>
+        <span>Sign out</span>
       </AppButton>
     );
   }
@@ -49,7 +49,7 @@ const AppAuthButton = () => {
       onClick={handleGoogleAuth}
     >
       <Image src={googleLogo} alt="" />
-      <span>Login with google</span>
+      <span>Sign in</span>
     </AppButton>
   );
 };

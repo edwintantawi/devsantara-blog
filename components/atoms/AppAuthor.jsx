@@ -5,7 +5,7 @@ import Colors from '../../styles/colors';
 
 const AppAuthor = ({ authorName, timestamp, authorPicture }) => (
   <BlogCardAuthor>
-    <Avatar style={{ width: '2rem', height: '2rem' }} src={authorPicture} />
+    <Avatar src={authorPicture} />
     <BlogCardIdentity>
       <span>{authorName}</span>
       <span>
@@ -18,21 +18,26 @@ const AppAuthor = ({ authorName, timestamp, authorPicture }) => (
 const BlogCardAuthor = styled.div`
   display: flex;
   align-items: center;
+
+  .MuiAvatar-root {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 const BlogCardIdentity = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 0.6rem;
+  padding-left: 10px;
 
   span:nth-child(1) {
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 12px;
     color: ${Colors.gray};
   }
 
   span:nth-child(2) {
-    font-size: 0.7rem;
+    font-size: 11px;
     color: ${Colors.gray};
     margin-top: -3px;
   }

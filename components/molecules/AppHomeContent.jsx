@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AppBlogpostCard from '../atoms/AppBlogpostCard';
 import AppBlogpostCardSkeleton from '../atoms/AppBlogpostCardSkeleton';
-import AppErroState from '../atoms/AppErroState';
+import AppErrorState from '../atoms/AppErrorState';
 
 const AppHomeContent = () => {
   const [blogposts, setBlogposts] = useState([]);
@@ -24,7 +24,7 @@ const AppHomeContent = () => {
   }, []);
 
   if (error) {
-    return <AppErroState />;
+    return <AppErrorState />;
   }
 
   return (

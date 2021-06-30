@@ -28,11 +28,11 @@ const LinkLayout = styled.a`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0.8rem 1rem;
-  margin-bottom: 0.5rem;
+  height: 40px;
+  margin: 0 0 4px;
+  padding: 0 16px;
   border-radius: 6px;
   text-decoration: none;
-  background-color: ${Colors.white};
   color: ${Colors.darkBlue};
   font-weight: ${({ active }) => active && 'bold'};
 
@@ -40,13 +40,13 @@ const LinkLayout = styled.a`
     background-color: rgba(0, 18, 39, 0.05);
   }
 
-  ${minWidth('md')} {
-    padding: 0.8rem 1rem;
+  .MuiSvgIcon-root {
+    width: 16px;
+    height: 16px;
   }
 
-  .MuiSvgIcon-root {
-    width: 1.8rem;
-    height: 1.8rem;
+  ${minWidth('md')} {
+    margin: 0 0 8px;
   }
 `;
 
@@ -56,8 +56,8 @@ const LinkContent = styled.span`
 `;
 
 const TitleLayout = styled.div`
-  margin-left: 0.8rem;
-  font-size: 1rem;
+  margin-left: 8px;
+  font-size: 14px;
   font-weight: ${({ active }) => (active ? 700 : 500)};
 `;
 

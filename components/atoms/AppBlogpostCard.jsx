@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import Colors from '../../styles/colors';
 import AppAuthor from './AppAuthor';
+import minWidth from '../../styles/mediaQuery';
 
 const AppBlogCard = ({ index, url, data }) => (
   <BlogCardLayout>
@@ -40,15 +41,19 @@ const AppBlogCard = ({ index, url, data }) => (
 );
 
 const BlogCardLayout = styled.article`
-  margin-bottom: 0.8rem;
-  background-color: ${Colors.lightGray};
+  margin: 8px 8px 0;
+  background-color: ${Colors.white};
   border: 1px solid ${Colors.mediumGray};
   border-radius: 6px;
   overflow: hidden;
+
+  ${minWidth('md')} {
+    margin: 0 0 12px;
+  }
 `;
 
 const BlogCardContent = styled.div`
-  padding: 1rem 1.5rem 1.5rem;
+  padding: 16px 24px 24px;
 
   & > a {
     text-decoration: none;
@@ -56,28 +61,33 @@ const BlogCardContent = styled.div`
 
     h3 {
       display: block;
-      margin-top: 1rem;
+      margin-top: 12px;
       display: -webkit-box;
-      font-size: 1.5rem;
+      font-size: 20px;
       font-weight: 600;
       line-height: 1.2;
-      max-height: 4.4rem;
+      max-height: 70px;
       overflow: hidden;
       text-overflow: ellipsis;
       box-orient: vertical;
       -webkit-box-orient: vertical;
       line-clamp: 2;
       -webkit-line-clamp: 2;
+
+      ${minWidth('md')} {
+        margin-top: 14px;
+        font-size: 24px;
+      }
     }
   }
 
   & > div {
-    margin-top: 0.8rem;
+    margin-top: 12px;
     span {
       display: inline-block;
       margin-right: 0.8rem;
       color: ${Colors.gray};
-      font-size: 0.9rem;
+      font-size: 14px;
     }
   }
 `;

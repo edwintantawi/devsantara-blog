@@ -50,11 +50,12 @@ const MainLayout = styled.main`
   display: grid;
   grid-template-columns: 1fr;
   column-gap: 32px;
-  padding: 1.5rem 0;
   box-sizing: border-box;
+  padding: 0 0 48px 0;
 
   ${minWidth('md')} {
     grid-template-columns: auto 1fr;
+    padding: 16px 16px 48px;
   }
 `;
 

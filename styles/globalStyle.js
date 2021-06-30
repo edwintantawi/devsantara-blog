@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import minWidth from './mediaQuery';
+import Colors from './colors';
+// import minWidth from './mediaQuery';
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after{
@@ -7,15 +8,14 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     border: none;
     outline: none;
-    font-size: 12px;
+    font-size: 100%;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
   }
-
-  html {
-    ${minWidth('md')} {
-      font-size: 16px;
-    }
+  
+  body {
+  background-color: ${Colors.lightGray};
+  
   }
 `;
 

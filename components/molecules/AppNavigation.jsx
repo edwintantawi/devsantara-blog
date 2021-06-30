@@ -51,19 +51,21 @@ const AppNavigation = ({ noNavigation }) => {
             onClick={handleClickLink}
           />
           {user && (
-            <AppLink
-              href="/dashboard"
-              title="Dashboard"
-              Icon={DashboardIcon}
-              onClick={handleClickLink}
-            />
+            <>
+              <AppLink
+                href="/dashboard"
+                title="Dashboard"
+                Icon={DashboardIcon}
+                onClick={handleClickLink}
+              />
+              <AppLink
+                href="/settings"
+                title="Settings"
+                Icon={SettingsIcon}
+                onClick={handleClickLink}
+              />
+            </>
           )}
-          <AppLink
-            href="/settings"
-            title="Settings"
-            Icon={SettingsIcon}
-            onClick={handleClickLink}
-          />
         </div>
         <HideOnDesktop>
           <HorizontalLine />
@@ -89,26 +91,26 @@ const NavLayout = styled.div`
   z-index: 9;
   left: 0;
   right: 0;
-  top: 51px;
+  top: 60px;
   bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 70%;
   background-color: ${Colors.white};
-  padding: 1.5rem 1rem 2rem;
+  padding: 16px 0;
   /* border-bottom: 3px solid ${Colors.darkBlue}; */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transform: ${({ active }) =>
-    active ? 'tranlateY(0)' : 'translateX(-100vh)'};
+    active ? 'translateY(0)' : 'translateX(-100vh)'};
   opacity: ${({ active }) => (active ? '1' : '0')};
   visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
   transition: 300ms ease-in-out;
 
   ${minWidth('md')} {
     position: sticky;
-    top: 93px;
-    width: 18rem;
+    top: 76px;
+    width: 210px;
     height: max-content;
     padding: 0;
     border: none;
@@ -116,6 +118,7 @@ const NavLayout = styled.div`
     transform: none;
     opacity: 1;
     visibility: visible;
+    background-color: transparent;
   }
 `;
 
@@ -126,6 +129,7 @@ const HorizontalLine = styled.hr`
 `;
 
 const HideOnDesktop = styled.div`
+  padding: 0 16px;
   ${minWidth('md')} {
     display: none;
   }

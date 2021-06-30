@@ -5,7 +5,7 @@ import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
 const AppBlogPostContent = ({ blogpost }) => (
-  <main style={{ minWidth: '100%' }}>
+  <BlogpostWrapper>
     <BlogPostHeading>
       <h1 className="title">{blogpost.title}</h1>
       <div className="tags">
@@ -19,28 +19,40 @@ const AppBlogPostContent = ({ blogpost }) => (
         authorPicture={blogpost.authorPicture}
       />
     </BlogPostHeading>
-    <EditorStyle
-      view
-      dangerouslySetInnerHTML={{ __html: blogpost.htmlContent }}
-    />
-  </main>
+    <EditorStyle view>
+      <div dangerouslySetInnerHTML={{ __html: blogpost.htmlContent }} />
+    </EditorStyle>
+  </BlogpostWrapper>
 );
 
+const BlogpostWrapper = styled.div`
+  min-width: 100%;
+  border: 1px solid ${Colors.mediumGray};
+  border-radius: 6px;
+  overflow: hidden;
+`;
+
 const BlogPostHeading = styled.header`
-  padding: 1.5rem 0.5rem 3rem;
+  padding: 32px 12px 32px;
   max-width: 100%;
+  background-color: ${Colors.white};
 
   ${minWidth('md')} {
     padding: 3rem 3rem 0;
   }
 
   & > .title {
-    font-size: 3rem;
     line-height: 1.3;
+    font-size: 30px;
+    font-weight: 700;
+
+    ${minWidth('md')} {
+      font-size: 48px;
+    }
   }
 
   & > .tags {
-    margin: 0.5rem 0 1rem;
+    margin: 16px 0 8px;
 
     span {
       display: inline-block;

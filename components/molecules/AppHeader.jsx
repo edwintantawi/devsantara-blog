@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Avatar from '@material-ui/core/Avatar';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -25,19 +24,15 @@ const AppHeader = () => {
     <Header>
       <AppWrapper>
         <HeaderWrapper>
-          <HeaderLeft>
-            <MenuButton type="button" onClick={handleToggleNav}>
-              {isActiveNavDrawer ? <CloseIcon /> : <MenuIcon />}
-            </MenuButton>
-            <AppLogo />
-          </HeaderLeft>
+          <MenuButton type="button" onClick={handleToggleNav}>
+            {isActiveNavDrawer ? <CloseIcon /> : <MenuIcon />}
+          </MenuButton>
+          <AppLogo />
           <HeaderAction>
             <HideOnMobile>
               <AppAuthButton />
             </HideOnMobile>
-            <IconButton>
-              <Avatar src={user?.photoURL} />
-            </IconButton>
+            <Avatar src={user?.photoURL} />
           </HeaderAction>
         </HeaderWrapper>
       </AppWrapper>
@@ -45,10 +40,12 @@ const AppHeader = () => {
   );
 };
 
+// styled
 const Header = styled.header`
   position: sticky;
   top: 0;
   z-index: 10;
+  height: 60px;
   background-color: ${Colors.darkBlue};
 `;
 
@@ -56,35 +53,18 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 0;
-`;
-
-const HeaderLeft = styled.div`
-  display: flex;
-  align-items: center;
+  padding: 10px 16px;
 `;
 
 const HeaderAction = styled.div`
   display: flex;
   align-items: center;
 
-  .MuiAvatar-root,
-  & > .MuiSvgIcon-root {
-    display: flex;
-  }
-
-  .MuiButtonBase-root {
-    padding: 0;
-  }
-
-  .MuiButtonBase-root {
-    margin-left: 1rem;
-  }
-
   .MuiAvatar-root {
+    margin-left: 16px;
     border: 2px solid ${Colors.white};
-    width: 2.7rem;
-    height: 2.7rem;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
   }
 `;
@@ -99,12 +79,12 @@ const HideOnMobile = styled.div`
 const MenuButton = styled.button`
   display: flex;
   align-items: center;
-  margin-right: 1rem;
+  margin-right: 8px;
   background: none;
 
   .MuiSvgIcon-root {
     color: ${Colors.white};
-    font-size: 30px;
+    font-size: 40px;
   }
 
   ${minWidth('md')} {
