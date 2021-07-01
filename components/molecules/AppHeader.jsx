@@ -30,6 +30,7 @@ const AppHeader = () => {
           <AppLogo />
           <HeaderAction>
             <HideOnMobile>
+              {/* TODO 2 : Add create post button in desktop */}
               <AppAuthButton />
             </HideOnMobile>
             <Avatar src={user?.photoURL} />

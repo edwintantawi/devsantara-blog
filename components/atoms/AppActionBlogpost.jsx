@@ -7,6 +7,7 @@ import minWidth from '../../styles/mediaQuery';
 import Colors from '../../styles/colors';
 
 const AppActionBlogPost = () => (
+  // TODO 4 : Handle each action
   <ActionBlogPostLayout>
     <IconButton>
       <FavoriteBorderIcon />

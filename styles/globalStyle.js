@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-  background-color: ${Colors.lightGray};
+  //background-color: ${Colors.lightGray};
   
   }
 `;

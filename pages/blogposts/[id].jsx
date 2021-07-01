@@ -5,6 +5,7 @@ import AppActionBlogpost from '../../components/atoms/AppActionBlogpost';
 import AppBlogpostContent from '../../components/molecules/AppBlogpostContent';
 
 const BlogPost = ({ blogpost }) => (
+  // TODO 3 : Handle num of visitor
   <AppShell
     title={blogpost.title}
     keywords={`${blogpost.keywords.join(', ')}, ${blogpost.tags

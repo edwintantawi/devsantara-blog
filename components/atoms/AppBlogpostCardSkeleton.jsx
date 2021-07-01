@@ -27,8 +27,8 @@ const AppBlogCardSkeleton = () => (
 );
 
 const BlogCardLayout = styled.article`
-  margin: 8px 8px 0;
-  background-color: ${Colors.white};
+  margin: 8px 8px 10px;
+  background-color: ${Colors.lightGray};
   border: 1px solid ${Colors.mediumGray};
   border-radius: 6px;
   overflow: hidden;

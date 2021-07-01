@@ -7,6 +7,7 @@ import AppAuthor from './AppAuthor';
 import minWidth from '../../styles/mediaQuery';
 
 const AppBlogCard = ({ index, url, data }) => (
+  // TODO 5 : show infomation of like and views
   <BlogCardLayout>
     {index === -1 && (
       <Image
@@ -41,8 +42,8 @@ const AppBlogCard = ({ index, url, data }) => (
 );
 
 const BlogCardLayout = styled.article`
-  margin: 8px 8px 0;
-  background-color: ${Colors.white};
+  margin: 8px 8px 10px;
+  background-color: ${Colors.lightGray};
   border: 1px solid ${Colors.mediumGray};
   border-radius: 6px;
   overflow: hidden;

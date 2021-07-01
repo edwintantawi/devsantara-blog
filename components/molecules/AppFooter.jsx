@@ -34,6 +34,10 @@ const FooterLayout = styled.footer`
   color: ${Colors.white};
   text-align: center;
 
+  ${minWidth('md')} {
+    padding: 24px 16px;
+  }
+
   img {
     height: 1.8rem;
     width: 100%;

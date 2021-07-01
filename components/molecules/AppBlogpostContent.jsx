@@ -27,7 +27,6 @@ const AppBlogPostContent = ({ blogpost }) => (
 
 const BlogpostWrapper = styled.div`
   min-width: 100%;
-  border: 1px solid ${Colors.mediumGray};
   border-radius: 6px;
   overflow: hidden;
 `;

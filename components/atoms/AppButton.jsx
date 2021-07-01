@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Colors from '../../styles/colors';
+import minWidth from '../../styles/mediaQuery';
 
 const AppButton = ({ children, type, className, onClick }) => (
   <Button type={type} className={className} onClick={onClick}>
@@ -26,7 +27,11 @@ const Button = styled.button`
   span {
     margin-left: 8px;
     font-weight: inherit;
-    font-size: 14px;
+    font-size: 12px;
+
+    ${minWidth('md')} {
+      font-size: 14px;
+    }
   }
 
   img,

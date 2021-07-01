@@ -92,10 +92,15 @@ const EditorStyle = styled.div`
 
   code {
     display: inline-block;
-    padding: 0.2rem 0.6rem;
+    padding: 0.5px 6px;
     background-color: #61616132;
     color: #424242;
     font-family: 'JetBrainsMono', monospace;
+    font-size: 14px;
+
+    ${minWidth('md')} {
+      font-size: 16px;
+    }
   }
 
   pre {
@@ -120,7 +125,6 @@ const EditorStyle = styled.div`
       color: inherit;
       padding: 0;
       background: none;
-      font-size: 1rem;
     }
   }
 
