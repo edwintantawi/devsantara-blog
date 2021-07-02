@@ -15,6 +15,7 @@ const AppShell = ({
   description,
   url,
   noNavigation,
+  hightFooter,
 }) => (
   <RootLayout>
     <ViewLayout>
@@ -32,7 +33,7 @@ const AppShell = ({
         </MainLayout>
       </AppWrapper>
     </ViewLayout>
-    <AppFooter />
+    <AppFooter hightFooter={hightFooter} />
   </RootLayout>
 );
 
@@ -59,9 +60,14 @@ const MainLayout = styled.main`
   }
 `;
 
-AppShell.propTypes = { ...appHeadPropTypes, noNavigation: PropTypes.bool };
+AppShell.propTypes = {
+  ...appHeadPropTypes,
+  noNavigation: PropTypes.bool,
+  hightFooter: PropTypes.bool,
+};
 AppShell.defaultProps = {
   noNavigation: false,
+  hightFooter: false,
 };
 
 export default AppShell;

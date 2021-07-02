@@ -7,7 +7,6 @@ import AppAuthor from './AppAuthor';
 import minWidth from '../../styles/mediaQuery';
 
 const AppBlogCard = ({ index, url, data }) => (
-  // TODO 5 : show infomation of like and views
   <BlogCardLayout>
     {index === -1 && (
       <Image
@@ -54,7 +53,11 @@ const BlogCardLayout = styled.article`
 `;
 
 const BlogCardContent = styled.div`
-  padding: 16px 24px 24px;
+  padding: 8px 18px 16px;
+
+  ${minWidth('md')} {
+    padding: 16px 24px 24px;
+  }
 
   & > a {
     text-decoration: none;
@@ -83,12 +86,15 @@ const BlogCardContent = styled.div`
   }
 
   & > div {
-    margin-top: 12px;
+    margin-top: 8px;
     span {
       display: inline-block;
       margin-right: 0.8rem;
       color: ${Colors.gray};
-      font-size: 14px;
+      font-size: 12px;
+      ${minWidth('md')} {
+        font-size: 14px;
+      }
     }
   }
 `;

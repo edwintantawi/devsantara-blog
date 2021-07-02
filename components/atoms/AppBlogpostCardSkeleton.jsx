@@ -45,7 +45,11 @@ const BlogCardLayout = styled.article`
 `;
 
 const BlogCardContent = styled.div`
-  padding: 16px 24px 24px;
+  padding: 8px 18px 16px;
+
+  ${minWidth('md')} {
+    padding: 16px 24px 24px;
+  }
 
   .h3 {
     display: block;
@@ -66,12 +70,12 @@ const BlogCardContent = styled.div`
   }
 
   .tags {
-    margin-top: 0.8rem;
+    margin-top: 8px;
     span {
       display: inline-block;
-      margin-right: 0.8rem;
-      height: 1.2rem;
-      width: 4rem;
+      margin-right: 8px;
+      height: 16px;
+      width: 64px;
       background-color: ${Colors.mediumGray};
       border-radius: 8px;
     }
@@ -81,17 +85,17 @@ const BlogCardContent = styled.div`
 const BlogCardAuthor = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 16px;
 `;
 
 const BlogCardIdentity = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 0.6rem;
+  padding-left: 12px;
 
   span {
     width: 4rem;
-    height: 0.7rem;
+    height: 12px;
     background-color: ${Colors.mediumGray};
     border-radius: 8px;
   }

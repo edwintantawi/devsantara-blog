@@ -14,6 +14,7 @@ const BlogPost = ({ blogpost }) => (
     description={blogpost.htmlContent.split('').splice(0, 100).join('')}
     url={`blogpost/${blogpost.id}`}
     noNavigation
+    hightFooter
   >
     <AppActionBlogpost />
     <AppBlogpostContent blogpost={blogpost} />

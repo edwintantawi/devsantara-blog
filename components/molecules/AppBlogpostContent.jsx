@@ -58,8 +58,12 @@ const BlogPostHeading = styled.header`
       margin: 0 0.5rem 0.5rem 0;
       padding: 0.2rem 0.5rem;
       color: ${Colors.gray};
-      font-size: 1rem;
+      font-size: 12px;
       background-color: ${Colors.lightGray};
+
+      ${minWidth('md')} {
+        font-size: 14px;
+      }
     }
   }
 `;

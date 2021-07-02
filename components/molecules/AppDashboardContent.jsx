@@ -79,6 +79,9 @@ const DashboardLayout = styled.div`
 
     ${minWidth('md')} {
       padding: 0;
+    }
+
+    ${minWidth('lg')} {
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 16px;
     }

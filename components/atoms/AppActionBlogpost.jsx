@@ -40,7 +40,7 @@ const ActionBlogPostLayout = styled.div`
     position: sticky;
     top: 120px;
     height: max-content;
-    margin-top: 60px;
+    margin-top: 50px;
     background-color: transparent;
     border: none;
     box-shadow: none;
@@ -48,7 +48,41 @@ const ActionBlogPostLayout = styled.div`
 
   button {
     margin-bottom: 0;
-    padding: 6px;
+    padding: 12px;
+
+    &:nth-child(1).MuiIconButton-root:hover {
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+    &:nth-child(2).MuiIconButton-root:hover {
+      background-color: rgba(0, 255, 0, 0.1);
+    }
+    &:nth-child(3).MuiIconButton-root:hover {
+      background-color: rgba(0, 0, 255, 0.1);
+    }
+
+    &.MuiIconButton-root:nth-child(1) {
+      color: red;
+    }
+    &.MuiIconButton-root:nth-child(2) {
+      color: green;
+    }
+    &.MuiIconButton-root:nth-child(3) {
+      color: blue;
+    }
+
+    & .MuiSvgIcon-root {
+      color: ${Colors.gray};
+    }
+
+    &:nth-child(1):hover .MuiSvgIcon-root {
+      color: red;
+    }
+    &:nth-child(2):hover .MuiSvgIcon-root {
+      color: green;
+    }
+    &:nth-child(3):hover .MuiSvgIcon-root {
+      color: blue;
+    }
 
     ${minWidth('md')} {
       margin-bottom: 32px;
@@ -58,6 +92,16 @@ const ActionBlogPostLayout = styled.div`
       width: 28px;
       height: 28px;
     }
+  }
+
+  button:nth-child(1):hover .MuiSvgIcon-root {
+    color: red;
+  }
+  button:nth-child(2):hover .MuiSvgIcon-root {
+    color: green;
+  }
+  button:nth-child(3):hover .MuiSvgIcon-root {
+    color: blue;
   }
 `;
 
