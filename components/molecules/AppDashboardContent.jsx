@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import minWidth from '../../styles/mediaQuery';
 import Colors from '../../styles/colors';
 import AppHomeContent from './AppHomeContent';
@@ -7,25 +8,43 @@ import useAuthContext from '../../hooks/useAuthContext';
 
 const AppDashboardContent = () => {
   const [{ user }] = useAuthContext();
+  const [stats, setStats] = useState({});
+
+  const getUserStats = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/user?uid=${user.uid}`
+      );
+      const responseJson = await response.json();
+      setStats(responseJson.result);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    getUserStats();
+  }, []);
+
   return (
     <DashboardLayout>
       <h1>Dashboard</h1>
       <div className="stats">
         <DashboardStat>
           <h2>Posts</h2>
-          <span>120</span>
+          <span>{stats.posts ?? '-'}</span>
         </DashboardStat>
         <DashboardStat>
           <h2>Visitors</h2>
-          <span>48.048.3453</span>
+          <span>{stats.visitors ?? '-'}</span>
         </DashboardStat>
         <DashboardStat>
           <h2>Followers</h2>
-          <span>30</span>
+          <span>-</span>
         </DashboardStat>
         <DashboardStat>
           <h2>Followings</h2>
-          <span>19</span>
+          <span>-</span>
         </DashboardStat>
       </div>
       <Link href="/myposts/editor" passHref>

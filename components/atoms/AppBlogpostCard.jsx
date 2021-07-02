@@ -6,7 +6,7 @@ import Colors from '../../styles/colors';
 import AppAuthor from './AppAuthor';
 import minWidth from '../../styles/mediaQuery';
 
-const AppBlogCard = ({ index, url, data }) => (
+const AppBlogCard = ({ index, id, data }) => (
   <BlogCardLayout>
     {index === -1 && (
       <Image
@@ -26,7 +26,7 @@ const AppBlogCard = ({ index, url, data }) => (
         timestamp={data.timestamp}
         authorPicture={data.authorPicture}
       />
-      <Link href={url}>
+      <Link href={`/blogposts/${id}`}>
         <a>
           <h3>{data.title}</h3>
         </a>
@@ -101,7 +101,7 @@ const BlogCardContent = styled.div`
 
 AppBlogCard.propTypes = {
   index: PropTypes.number.isRequired,
-  url: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default AppBlogCard;

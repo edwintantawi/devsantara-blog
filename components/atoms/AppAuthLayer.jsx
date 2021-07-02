@@ -31,7 +31,7 @@ const AppAuthLayer = ({ children }) => {
     });
 
     return () => unSubscribe();
-  }, [dispatchAuth, dispatchApp]);
+  }, []);
 
   return isLoading ? <AppLoading /> : children;
 };

@@ -38,7 +38,7 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction }) => {
 
   useEffect(() => {
     getBlogposts();
-  }, [getBlogposts]);
+  }, []);
 
   if (error) {
     return <AppErrorState message={errorMessage} />;
@@ -58,7 +58,7 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction }) => {
       {blogposts.map(({ id, data }, index) => (
         <AppBlogpostCard
           key={id}
-          url={`/blogposts/${id}`}
+          id={id}
           index={index}
           data={{
             bannerImage: data.bannerImage,
