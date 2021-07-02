@@ -119,7 +119,7 @@ const EditorLayout = styled.div`
 
   ${minWidth('md')} {
     margin-top: 16px;
-    border-radius: 6px;
+    border-radius: 8px;
   }
 `;
 

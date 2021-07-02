@@ -3,7 +3,7 @@ import AppHomeContent from '../components/molecules/AppHomeContent';
 
 const Home = () => (
   <AppShell>
-    <AppHomeContent />
+    <AppHomeContent endpoint="blogposts" />
   </AppShell>
 );
 

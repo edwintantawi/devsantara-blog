@@ -42,8 +42,8 @@ export const getStaticProps = async ({ params: { id } }) => {
   return {
     props: {
       blogpost: {
-        ...responseJson.data,
-        htmlContent: generateHTML(responseJson.data.postJson, [StarterKit]),
+        ...responseJson.result,
+        htmlContent: generateHTML(responseJson.result.postJson, [StarterKit]),
       },
     },
     revalidate: 10,

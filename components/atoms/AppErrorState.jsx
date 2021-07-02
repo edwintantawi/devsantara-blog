@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Colors from '../../styles/colors';
+import minWidth from '../../styles/mediaQuery';
 
-const AppErrorState = () => (
+const AppErrorState = ({ message }) => (
   <ErrorStateLayout>
     <HighlightOffIcon />
-    <h1>Ooops somethings wrong...</h1>
-    <p>Try to refresh the page</p>
+    <span>{message[0]}</span>
+    <p>{message[1]}</p>
   </ErrorStateLayout>
 );
 
@@ -16,16 +17,27 @@ const ErrorStateLayout = styled.main`
   color: ${Colors.mediumGray};
 
   .MuiSvgIcon-root {
-    font-size: 48px;
+    font-size: 40px;
+    ${minWidth('md')} {
+      font-size: 48px;
+    }
   }
-  h1 {
+  span {
+    display: block;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1.2;
     margin-bottom: 8px;
+
+    ${minWidth('md')} {
+      font-size: 24px;
+    }
   }
   p {
-    font-size: 14px;
+    font-size: 12px;
+    ${minWidth('md')} {
+      font-size: 14px;
+    }
   }
 `;
 

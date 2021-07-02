@@ -2,54 +2,53 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import minWidth from '../../styles/mediaQuery';
 import Colors from '../../styles/colors';
-import AppBlogpostCardSkeleton from '../atoms/AppBlogpostCardSkeleton';
+import AppHomeContent from './AppHomeContent';
+import useAuthContext from '../../hooks/useAuthContext';
 
-const AppDashboardContent = () => (
-  <DashboardLayout>
-    <h1>Dashboard</h1>
-    <div className="stats">
-      <DashboardStat>
-        <h2>Posts</h2>
-        <span>120</span>
-      </DashboardStat>
-      <DashboardStat>
-        <h2>Visitors</h2>
-        <span>48.048.3453</span>
-      </DashboardStat>
-      <DashboardStat>
-        <h2>Followers</h2>
-        <span>30</span>
-      </DashboardStat>
-      <DashboardStat>
-        <h2>Followings</h2>
-        <span>19</span>
-      </DashboardStat>
-    </div>
-    <Link href="/myposts/editor" passHref>
-      <DashboardAction>
-        <p>Create new Post</p>
-      </DashboardAction>
-    </Link>
-    <h2>Popular Posts</h2>
-    <div>
-      <AppBlogpostCardSkeleton />
-      <AppBlogpostCardSkeleton />
-      <AppBlogpostCardSkeleton />
-    </div>
-    <h2>Latest Posts</h2>
-    <div>
-      <AppBlogpostCardSkeleton />
-      <AppBlogpostCardSkeleton />
-      <AppBlogpostCardSkeleton />
-    </div>
-
-    <Link href="/myposts" passHref>
-      <DashboardAction>
-        <p>See all my posts</p>
-      </DashboardAction>
-    </Link>
-  </DashboardLayout>
-);
+const AppDashboardContent = () => {
+  const [{ user }] = useAuthContext();
+  return (
+    <DashboardLayout>
+      <h1>Dashboard</h1>
+      <div className="stats">
+        <DashboardStat>
+          <h2>Posts</h2>
+          <span>120</span>
+        </DashboardStat>
+        <DashboardStat>
+          <h2>Visitors</h2>
+          <span>48.048.3453</span>
+        </DashboardStat>
+        <DashboardStat>
+          <h2>Followers</h2>
+          <span>30</span>
+        </DashboardStat>
+        <DashboardStat>
+          <h2>Followings</h2>
+          <span>19</span>
+        </DashboardStat>
+      </div>
+      <Link href="/myposts/editor" passHref>
+        <DashboardAction>
+          <p>Create new Post</p>
+        </DashboardAction>
+      </Link>
+      <h2>Popular Posts</h2>
+      <AppHomeContent
+        endpoint={`blogposts?uid=${user.uid}&popular=true`}
+        limit={3}
+      />
+      <h2>Latest Posts</h2>
+      <div>
+        <AppHomeContent
+          endpoint={`blogposts?uid=${user.uid}&latest=true`}
+          limit={3}
+          seeAllPostAction
+        />
+      </div>
+    </DashboardLayout>
+  );
+};
 
 const DashboardLayout = styled.div`
   h1 {
