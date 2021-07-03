@@ -14,7 +14,6 @@ const Dashboard = () => {
     return (
       <AppShell>
         <AppDashboardContent />
-        {/* TODO 1.4.1 : Action to Update and Delete each post */}
       </AppShell>
     );
   }

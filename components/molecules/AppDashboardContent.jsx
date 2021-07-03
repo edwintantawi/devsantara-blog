@@ -56,6 +56,7 @@ const AppDashboardContent = () => {
       <AppHomeContent
         endpoint={`blogposts?uid=${user.uid}&popular=true`}
         limit={3}
+        editable
       />
       <h2>Latest Posts</h2>
       <div>
@@ -63,6 +64,7 @@ const AppDashboardContent = () => {
           endpoint={`blogposts?uid=${user.uid}&latest=true`}
           limit={3}
           seeAllPostAction
+          editable
         />
       </div>
     </DashboardLayout>

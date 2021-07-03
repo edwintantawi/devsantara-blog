@@ -17,7 +17,7 @@ const MyPosts = () => {
       <AppShell>
         <MyPostsLayout>
           <h1>Your Posts</h1>
-          <AppHomeContent endpoint={`blogposts?uid=${user.uid}`} />
+          <AppHomeContent endpoint={`blogposts?uid=${user.uid}`} editable />
         </MyPostsLayout>
       </AppShell>
     );

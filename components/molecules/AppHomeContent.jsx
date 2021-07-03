@@ -8,7 +8,7 @@ import AppErrorState from '../atoms/AppErrorState';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
-const AppHomeContent = ({ endpoint, limit, seeAllPostAction }) => {
+const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
   const [blogposts, setBlogposts] = useState([]);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState([
@@ -57,6 +57,7 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction }) => {
       )}
       {blogposts.map(({ id, data }, index) => (
         <AppBlogpostCard
+          editable={editable}
           key={id}
           id={id}
           index={index}
@@ -111,11 +112,13 @@ AppHomeContent.propTypes = {
   endpoint: PropTypes.string.isRequired,
   limit: PropTypes.number,
   seeAllPostAction: PropTypes.bool,
+  editable: PropTypes.bool,
 };
 
 AppHomeContent.defaultProps = {
   limit: 10,
   seeAllPostAction: false,
+  editable: false,
 };
 
 export default AppHomeContent;

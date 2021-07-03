@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { IconButton } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import Link from 'next/link';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -6,7 +8,7 @@ import Colors from '../../styles/colors';
 import AppAuthor from './AppAuthor';
 import minWidth from '../../styles/mediaQuery';
 
-const AppBlogCard = ({ index, id, data }) => (
+const AppBlogCard = ({ index, id, data, editable }) => (
   <BlogCardLayout>
     {index === -1 && (
       <Image
@@ -21,17 +23,26 @@ const AppBlogCard = ({ index, id, data }) => (
     )}
 
     <BlogCardContent>
-      <AppAuthor
-        authorName={data.authorName}
-        timestamp={data.timestamp}
-        authorPicture={data.authorPicture}
-      />
+      <AuthorRow>
+        <AppAuthor
+          authorName={data.authorName}
+          timestamp={data.timestamp}
+          authorPicture={data.authorPicture}
+        />
+        {editable && (
+          <Link href={`/myposts/editor?id=${id}`} passHref>
+            <IconButton>
+              <EditIcon />
+            </IconButton>
+          </Link>
+        )}
+      </AuthorRow>
       <Link href={`/blogposts/${id}`}>
         <a>
           <h3>{data.title}</h3>
         </a>
       </Link>
-      <div>
+      <div className="tags">
         {data.tags.map((tag) => (
           <span key={tag.id}>#{tag.title}</span>
         ))}
@@ -69,8 +80,8 @@ const BlogCardContent = styled.div`
       display: -webkit-box;
       font-size: 20px;
       font-weight: 600;
-      line-height: 1.2;
-      max-height: 70px;
+      line-height: 1.3;
+      max-height: 72px;
       overflow: hidden;
       text-overflow: ellipsis;
       box-orient: vertical;
@@ -79,13 +90,14 @@ const BlogCardContent = styled.div`
       -webkit-line-clamp: 2;
 
       ${minWidth('md')} {
+        line-height: 1.5;
         margin-top: 14px;
         font-size: 24px;
       }
     }
   }
 
-  & > div {
+  & .tags {
     margin-top: 8px;
     span {
       display: inline-block;
@@ -99,9 +111,29 @@ const BlogCardContent = styled.div`
   }
 `;
 
+const AuthorRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  .MuiIconButton-root {
+    width: 40px;
+    height: 40px;
+    margin-right: -12px;
+
+    .MuiSvgIcon-root {
+      font-size: 20px;
+    }
+  }
+`;
+
 AppBlogCard.propTypes = {
   index: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+  editable: PropTypes.bool,
+};
+
+AppBlogCard.defaultProps = {
+  editable: false,
 };
 
 export default AppBlogCard;

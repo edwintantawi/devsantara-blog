@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEditor, EditorContent } from '@tiptap/react';
+import UpdateIcon from '@material-ui/icons/Update';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import styled from 'styled-components';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppButton from '../atoms/AppButton';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
@@ -13,7 +14,7 @@ import { auth } from '../../lib/firebase';
 import EditorStyle from '../../styles/editorStyle';
 import AppLoader from '../atoms/AppLoader';
 
-const AppTextEditor = () => {
+const AppTextEditor = ({ editableContent }) => {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,6 +25,14 @@ const AppTextEditor = () => {
     extensions: [StarterKit, Placeholder],
   });
 
+  useEffect(() => {
+    if (Object.entries(editableContent).length) {
+      setTitle(editableContent.title);
+      editor.commands.setContent(editableContent.postJson);
+      setTags(editableContent.tags.map((tag) => tag.title).join(', '));
+    }
+  }, [editableContent]);
+
   const postBlogpost = async (idToken, body) => {
     const options = {
       method: 'POST',
@@ -32,6 +41,9 @@ const AppTextEditor = () => {
       },
       body: JSON.stringify(body),
     };
+    if (Object.entries(editableContent).length) {
+      options.method = 'PUT';
+    }
 
     try {
       const response = await fetch(
@@ -57,6 +69,7 @@ const AppTextEditor = () => {
     auth.currentUser.getIdToken(true).then((idToken) => {
       const postJson = editor.getJSON();
       const body = {
+        ...editableContent,
         title,
         tags,
         postJson,
@@ -101,8 +114,17 @@ const AppTextEditor = () => {
           </EditorLayout>
           <EditorAction>
             <AppButton type="submit" className="large">
-              <AddCircleOutlineIcon />
-              <span>Create Post</span>
+              {Object.entries(editableContent).length ? (
+                <UpdateIcon />
+              ) : (
+                <AddCircleOutlineIcon />
+              )}
+
+              <span>
+                {Object.entries(editableContent).length
+                  ? 'Update Post'
+                  : 'Create Post'}
+              </span>
             </AppButton>
           </EditorAction>
         </FormLayout>
