@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -16,7 +16,7 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
     'Try to refresh the page',
   ]);
 
-  const getBlogposts = useCallback(async () => {
+  const getBlogposts = async () => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/${endpoint}`
@@ -34,7 +34,7 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
     } catch {
       setError(true);
     }
-  }, [endpoint]);
+  };
 
   useEffect(() => {
     getBlogposts();
