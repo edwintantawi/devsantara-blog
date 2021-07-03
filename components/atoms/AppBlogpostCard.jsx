@@ -64,10 +64,10 @@ const BlogCardLayout = styled.article`
 `;
 
 const BlogCardContent = styled.div`
-  padding: 8px 18px 16px;
+  padding: 18px 18px;
 
   ${minWidth('md')} {
-    padding: 16px 24px 24px;
+    padding: 24px 24px;
   }
 
   & > a {
