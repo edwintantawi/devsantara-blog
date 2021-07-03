@@ -87,7 +87,10 @@ const AppTextEditor = ({ editableContent }) => {
         <AppLoader
           type="error"
           message="Ooops somethings wrong..."
-          onClick={() => setError(false)}
+          onClick={() => {
+            setError(false);
+            setLoading(false);
+          }}
         />
       )}
       <div>

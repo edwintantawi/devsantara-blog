@@ -31,7 +31,8 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
       } else {
         setBlogposts(responseJson.results);
       }
-    } catch {
+    } catch (e) {
+      console.error(e);
       setError(true);
     }
   };
