@@ -9,7 +9,7 @@ const EditorStyle = styled.div`
   background-color: ${Colors.white};
 
   ${minWidth('md')} {
-    padding: 48px;
+    padding: ${({ view }) => (view ? '48px 16px' : '48px')};
   }
 
   * {

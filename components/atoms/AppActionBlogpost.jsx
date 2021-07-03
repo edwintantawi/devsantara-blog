@@ -27,7 +27,7 @@ const ActionBlogPostLayout = styled.div`
   align-items: center;
   position: fixed;
   width: 100%;
-  height: 60px;
+  height: 56px;
   bottom: 0;
   z-index: 5;
   background-color: ${Colors.white};
@@ -40,7 +40,7 @@ const ActionBlogPostLayout = styled.div`
     position: sticky;
     top: 120px;
     height: max-content;
-    margin-top: 50px;
+    margin-top: 32px;
     background-color: transparent;
     border: none;
     box-shadow: none;
@@ -49,16 +49,6 @@ const ActionBlogPostLayout = styled.div`
   button {
     margin-bottom: 0;
     padding: 12px;
-
-    &:nth-child(1).MuiIconButton-root:hover {
-      background-color: rgba(255, 0, 0, 0.1);
-    }
-    &:nth-child(2).MuiIconButton-root:hover {
-      background-color: rgba(0, 255, 0, 0.1);
-    }
-    &:nth-child(3).MuiIconButton-root:hover {
-      background-color: rgba(0, 0, 255, 0.1);
-    }
 
     &.MuiIconButton-root:nth-child(1) {
       color: red;
@@ -89,8 +79,12 @@ const ActionBlogPostLayout = styled.div`
     }
 
     .MuiSvgIcon-root {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
+      ${minWidth('md')} {
+        width: 28px;
+        height: 28px;
+      }
     }
   }
 

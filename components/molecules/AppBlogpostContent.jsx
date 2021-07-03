@@ -37,7 +37,7 @@ const BlogPostHeading = styled.header`
   background-color: ${Colors.white};
 
   ${minWidth('md')} {
-    padding: 3rem 3rem 0;
+    padding: 32px 16px 0;
   }
 
   & > .title {

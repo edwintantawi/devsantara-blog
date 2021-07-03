@@ -31,7 +31,7 @@ const AppFooter = ({ hightFooter }) => {
 
 const FooterLayout = styled.footer`
   padding: ${({ hightFooter }) =>
-    hightFooter ? '24px 16px 80px' : '24px 16px'};
+    hightFooter ? '22px 16px 70px' : '24px 16px'};
   background-color: ${Colors.darkBlue};
   color: ${Colors.white};
   text-align: center;
