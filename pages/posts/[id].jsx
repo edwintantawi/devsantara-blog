@@ -12,7 +12,7 @@ const BlogPost = ({ blogpost }) => {
         const item = localStorage.getItem(blogpost.id);
         if (!item) {
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts/${blogpost.id}`,
+            `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${blogpost.id}/visitor`,
             { method: 'PUT' }
           );
           if (response.status === 200) {
@@ -47,9 +47,7 @@ const BlogPost = ({ blogpost }) => {
 };
 
 export const getStaticPaths = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts`
-  );
+  const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/posts`);
   const responseJson = await response.json();
 
   const paths = responseJson.results.map(({ id }) => ({ params: { id } }));
@@ -61,7 +59,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { id } }) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts/${id}`
+    `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${id}`
   );
   const responseJson = await response.json();
 
@@ -70,7 +68,7 @@ export const getStaticProps = async ({ params: { id } }) => {
       blogpost: {
         ...responseJson.result,
         id,
-        htmlContent: generateHTML(responseJson.result.postJson, [StarterKit]),
+        htmlContent: generateHTML(responseJson.result.content, [StarterKit]),
       },
     },
     revalidate: 10,

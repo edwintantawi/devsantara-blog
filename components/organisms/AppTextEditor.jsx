@@ -28,26 +28,29 @@ const AppTextEditor = ({ editableContent }) => {
   useEffect(() => {
     if (Object.entries(editableContent).length) {
       setTitle(editableContent.title);
-      editor.commands.setContent(editableContent.postJson);
+      editor.commands.setContent(editableContent.content);
       setTags(editableContent.tags.map((tag) => tag.title).join(', '));
     }
   }, [editableContent]);
 
-  const postBlogpost = async (idToken, body) => {
+  const postBlogpost = async (token, body) => {
     const options = {
       method: 'POST',
       headers: {
-        idtoken: idToken,
+        token,
       },
       body: JSON.stringify(body),
     };
+
     if (Object.entries(editableContent).length) {
       options.method = 'PUT';
     }
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts`,
+        `${
+          process.env.NEXT_PUBLIC_DOMAIN
+        }/api/posts/${options.method.toLowerCase()}`,
         options
       );
       if (response.status === 201) {
@@ -66,15 +69,15 @@ const AppTextEditor = ({ editableContent }) => {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    auth.currentUser.getIdToken(true).then((idToken) => {
-      const postJson = editor.getJSON();
+    auth.currentUser.getIdToken(true).then((token) => {
+      const content = editor.getJSON();
       const body = {
         ...editableContent,
         title,
         tags,
-        postJson,
+        content,
       };
-      postBlogpost(idToken, body);
+      postBlogpost(token, body);
     });
   };
 

@@ -14,7 +14,7 @@ const Editor = () => {
   const getBlogpost = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/blogposts/${id}`
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${id}`
       );
       const responseJson = await response.json();
       if (response.status === 404) {

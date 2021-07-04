@@ -15,7 +15,7 @@ const AppBlogPostContent = ({ blogpost }) => (
       </div>
       <AppAuthor
         authorName={blogpost.authorName}
-        timestamp={blogpost.timestamp}
+        createAt={blogpost.createAt}
         authorPicture={blogpost.authorPicture}
       />
     </BlogPostHeading>

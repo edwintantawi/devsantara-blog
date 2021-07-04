@@ -66,7 +66,7 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
             bannerImage: data.bannerImage,
             authorPicture: data.authorPicture,
             authorName: data.authorName,
-            timestamp: data.timestamp,
+            createAt: data.createAt,
             title: data.title,
             tags: data.tags,
           }}

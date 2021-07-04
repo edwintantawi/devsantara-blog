@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { Avatar } from '@material-ui/core';
 import Colors from '../../styles/colors';
 
-const AppAuthor = ({ authorName, timestamp, authorPicture }) => (
+const AppAuthor = ({ authorName, createAt, authorPicture }) => (
   <BlogCardAuthor>
     <Avatar src={authorPicture} />
     <BlogCardIdentity>
       <span>{authorName}</span>
       <span>
-        {new Date(timestamp._seconds * 1000).toISOString().split('T')[0]}
+        {new Date(createAt._seconds * 1000).toISOString().split('T')[0]}
       </span>
     </BlogCardIdentity>
   </BlogCardAuthor>

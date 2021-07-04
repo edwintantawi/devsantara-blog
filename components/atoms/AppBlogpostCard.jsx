@@ -26,7 +26,7 @@ const AppBlogCard = ({ index, id, data, editable }) => (
       <AuthorRow>
         <AppAuthor
           authorName={data.authorName}
-          timestamp={data.timestamp}
+          createAt={data.createAt}
           authorPicture={data.authorPicture}
         />
         {editable && (
@@ -37,7 +37,7 @@ const AppBlogCard = ({ index, id, data, editable }) => (
           </Link>
         )}
       </AuthorRow>
-      <Link href={`/blogposts/${id}`}>
+      <Link href={`/posts/${id}`}>
         <a>
           <h3>{data.title}</h3>
         </a>

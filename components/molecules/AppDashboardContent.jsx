@@ -54,14 +54,14 @@ const AppDashboardContent = () => {
       </Link>
       <h2>Popular Posts</h2>
       <AppHomeContent
-        endpoint={`blogposts?uid=${user.uid}&popular=true`}
+        endpoint={`posts/popular/${user.uid}`}
         limit={3}
         editable
       />
       <h2>Latest Posts</h2>
       <div>
         <AppHomeContent
-          endpoint={`blogposts?uid=${user.uid}&latest=true`}
+          endpoint={`posts/latest/${user.uid}`}
           limit={3}
           seeAllPostAction
           editable
