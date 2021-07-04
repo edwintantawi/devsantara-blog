@@ -56,7 +56,11 @@ const AppTextEditor = ({ editableContent }) => {
       if (response.status === 201) {
         const responseJson = await response.json();
         const { url } = responseJson;
-        await router.push(url);
+        if (options.method === 'PUT') {
+          await router.push('/dashboard');
+        } else {
+          await router.push(url);
+        }
       } else {
         setError(true);
       }
