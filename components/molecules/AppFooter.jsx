@@ -8,7 +8,7 @@ import minWidth from '../../styles/mediaQuery';
 
 const AppFooter = ({ hightFooter }) => {
   const handleCopyrightYears = () => {
-    const firstYears = 2020;
+    const firstYears = 2021;
     const currentYears = new Date().getFullYear();
 
     if (firstYears === currentYears) {
