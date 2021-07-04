@@ -1,8 +1,8 @@
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import SettingsIcon from '@material-ui/icons/Settings';
+// import SettingsIcon from '@material-ui/icons/Settings';
 import styled from 'styled-components';
 import HomeIcon from '@material-ui/icons/Home';
-import GpsFixedIcon from '@material-ui/icons/GpsFixed';
+// import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 import GroupIcon from '@material-ui/icons/Group';
 import AppLink from '../atoms/AppLink';
 import minWidth from '../../styles/mediaQuery';
@@ -38,14 +38,14 @@ const AppNavigation = ({ noNavigation }) => {
             Icon={HomeIcon}
             onClick={handleClickLink}
           />
+          {/* <AppLink */}
+          {/*  href="/guide" */}
+          {/*  title="Guide" */}
+          {/*  Icon={GpsFixedIcon} */}
+          {/*  onClick={handleClickLink} */}
+          {/* /> */}
           <AppLink
-            href="/guide"
-            title="Guide"
-            Icon={GpsFixedIcon}
-            onClick={handleClickLink}
-          />
-          <AppLink
-            href="/about"
+            href="https://edwintantawi.vercel.app"
             title="About"
             Icon={GroupIcon}
             onClick={handleClickLink}
@@ -58,12 +58,12 @@ const AppNavigation = ({ noNavigation }) => {
                 Icon={DashboardIcon}
                 onClick={handleClickLink}
               />
-              <AppLink
-                href="/settings"
-                title="Settings"
-                Icon={SettingsIcon}
-                onClick={handleClickLink}
-              />
+              {/* <AppLink */}
+              {/*  href="/settings" */}
+              {/*  title="Settings" */}
+              {/*  Icon={SettingsIcon} */}
+              {/*  onClick={handleClickLink} */}
+              {/* /> */}
             </>
           )}
         </div>
