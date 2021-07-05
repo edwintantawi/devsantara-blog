@@ -40,7 +40,7 @@ const BlogPost = ({ blogpost }) => {
       noNavigation
       hightFooter
     >
-      <AppActionBlogpost />
+      <AppActionBlogpost id={blogpost.id} />
       <AppBlogpostContent blogpost={blogpost} />
     </AppShell>
   );

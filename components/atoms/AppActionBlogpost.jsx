@@ -1,25 +1,73 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { IconButton } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import minWidth from '../../styles/mediaQuery';
 import Colors from '../../styles/colors';
+import { auth } from '../../lib/firebase';
+import useAuthContext from '../../hooks/useAuthContext';
 
-const AppActionBlogPost = () => (
-  // TODO 4 : Handle each action
-  <ActionBlogPostLayout>
-    <IconButton>
-      <FavoriteBorderIcon />
-    </IconButton>
-    <IconButton>
-      <BookmarkBorderIcon />
-    </IconButton>
-    <IconButton>
-      <ShareIcon />
-    </IconButton>
-  </ActionBlogPostLayout>
-);
+const AppActionBlogPost = ({ id }) => {
+  const [{ user }] = useAuthContext();
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLike = async () => {
+    setIsLiked((prev) => !prev);
+    if (user) {
+      auth.currentUser.getIdToken(true).then(async (token) => {
+        const options = {
+          method: 'PUT',
+          headers: { token },
+        };
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${id}/like`,
+          options
+        );
+        if (response.status !== 200) {
+          setIsLiked((prev) => !prev);
+        }
+      });
+    } else {
+      // TODO: not login handler
+      console.log('login first');
+      setIsLiked(false);
+    }
+  };
+
+  const getStatus = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${id}`
+    );
+    const responseJson = await response.json();
+    setIsLiked(responseJson.result.likes.includes(user.uid));
+  };
+
+  useEffect(() => {
+    getStatus();
+  }, []);
+
+  return (
+    // TODO 4 : Handle each action
+    <ActionBlogPostLayout>
+      <IconButton onClick={handleLike}>
+        {isLiked ? (
+          <FavoriteIcon style={{ color: 'red' }} />
+        ) : (
+          <FavoriteBorderIcon />
+        )}
+      </IconButton>
+      <IconButton>
+        <BookmarkBorderIcon />
+      </IconButton>
+      <IconButton>
+        <ShareIcon />
+      </IconButton>
+    </ActionBlogPostLayout>
+  );
+};
 
 const ActionBlogPostLayout = styled.div`
   display: flex;
