@@ -38,16 +38,20 @@ const AppActionBlogPost = ({ id }) => {
   };
 
   const getStatus = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${id}`
-    );
-    const responseJson = await response.json();
-    setIsLiked(responseJson.result.likes.includes(user.uid));
+    if (user) {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${id}`
+      );
+      const responseJson = await response.json();
+      setIsLiked(responseJson.result.likes.includes(user.uid));
+    } else {
+      setIsLiked(false);
+    }
   };
 
   useEffect(() => {
     getStatus();
-  }, []);
+  }, [user]);
 
   return (
     // TODO 4 : Handle each action
