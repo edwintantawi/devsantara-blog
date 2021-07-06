@@ -9,20 +9,34 @@ import googleLogo from '../../public/assets/google.svg';
 const AppAuthButton = () => {
   const [{ user }, dispatchAuth] = useAuthContext();
 
-  const handleGoogleAuth = () => {
-    auth.setPersistence(localPersistence).then(() => {
-      auth.signInWithPopup(googleAuthProvider).then((result) => {
-        const userAuthData = {
-          uid: result.user.uid,
-          displayName: result.user.displayName,
-          email: result.user.email,
-          photoURL: result.user.photoURL,
-        };
+  const userDataHandler = () => {
+    auth.currentUser.getIdToken(true).then(async (token) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          token,
+        },
+      };
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/create`,
+        options
+      );
+      const responseJson = await response.json();
+      if (response.status !== 401) {
+        const userAuthData = responseJson.result;
 
         dispatchAuth({
           type: ACTION_TYPES.SET_AUTH,
           payload: userAuthData,
         });
+      }
+    });
+  };
+
+  const handleGoogleAuth = () => {
+    auth.setPersistence(localPersistence).then(() => {
+      auth.signInWithPopup(googleAuthProvider).then(() => {
+        userDataHandler();
       });
     });
   };
