@@ -9,14 +9,22 @@ import minWidth from '../../styles/mediaQuery';
 import Colors from '../../styles/colors';
 import { auth } from '../../lib/firebase';
 import useAuthContext from '../../hooks/useAuthContext';
+import AppActionBlogpostSkeleton from './AppActionBlogpostSkeleton';
 
 const AppActionBlogPost = ({ id }) => {
   const [{ user }] = useAuthContext();
+  const [loading, setLoading] = useState(true);
   const [isLiked, setIsLiked] = useState(false);
+  const [numOfLike, setNumOfLike] = useState(0);
 
   const handleLike = async () => {
-    setIsLiked((prev) => !prev);
     if (user) {
+      setIsLiked((prev) => !prev);
+      if (isLiked) {
+        setNumOfLike((prev) => prev - 1);
+      } else {
+        setNumOfLike((prev) => prev + 1);
+      }
       auth.currentUser.getIdToken(true).then(async (token) => {
         const options = {
           method: 'PUT',
@@ -28,25 +36,31 @@ const AppActionBlogPost = ({ id }) => {
         );
         if (response.status !== 200) {
           setIsLiked((prev) => !prev);
+          if (isLiked) {
+            setNumOfLike((prev) => prev + 1);
+          } else {
+            setNumOfLike((prev) => prev - 1);
+          }
         }
       });
     } else {
       // TODO: not login handler
       console.log('login first');
-      setIsLiked(false);
     }
   };
 
   const getStatus = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${id}`
+    );
+    const responseJson = await response.json();
+    setNumOfLike(responseJson.result.likes.length);
     if (user) {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/${id}`
-      );
-      const responseJson = await response.json();
       setIsLiked(responseJson.result.likes.includes(user.uid));
     } else {
       setIsLiked(false);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -56,22 +70,44 @@ const AppActionBlogPost = ({ id }) => {
   return (
     // TODO 4 : Handle each action
     <ActionBlogPostLayout>
-      <IconButton onClick={handleLike}>
-        {isLiked ? (
-          <FavoriteIcon style={{ color: 'red' }} />
-        ) : (
-          <FavoriteBorderIcon />
-        )}
-      </IconButton>
-      <IconButton>
-        <BookmarkBorderIcon />
-      </IconButton>
-      <IconButton>
-        <ShareIcon />
-      </IconButton>
+      {loading ? (
+        <>
+          <AppActionBlogpostSkeleton />
+          <AppActionBlogpostSkeleton />
+          <AppActionBlogpostSkeleton />
+        </>
+      ) : (
+        <>
+          <div className="button-wrapper">
+            <IconButton onClick={handleLike}>
+              {isLiked ? (
+                <FavoriteIcon style={{ color: 'red' }} />
+              ) : (
+                <FavoriteBorderIcon />
+              )}
+            </IconButton>
+            <span>{numOfLike}</span>
+          </div>
+          <div className="button-wrapper">
+            <IconButton>
+              <BookmarkBorderIcon />
+            </IconButton>
+            <span>-</span>
+          </div>
+
+          <div className="button-wrapper">
+            <IconButton>
+              <ShareIcon />
+            </IconButton>
+            <span>-</span>
+          </div>
+        </>
+      )}
     </ActionBlogPostLayout>
   );
 };
+
+export default AppActionBlogPost;
 
 const ActionBlogPostLayout = styled.div`
   display: flex;
@@ -89,26 +125,37 @@ const ActionBlogPostLayout = styled.div`
   ${minWidth('md')} {
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: sticky;
-    top: 120px;
+    top: 110px;
     height: max-content;
-    margin-top: 32px;
+    width: 52px;
+    margin-top: 0;
     background-color: transparent;
     border: none;
     box-shadow: none;
   }
 
-  button {
-    margin-bottom: 0;
-    padding: 12px;
+  .button-wrapper {
+    display: flex;
 
-    &.MuiIconButton-root:nth-child(1) {
+    align-items: center;
+    justify-content: center;
+
+    ${minWidth('md')} {
+      margin-bottom: 32px;
+      flex-direction: column;
+    }
+
+    &:nth-child(1) button.MuiIconButton-root {
       color: red;
     }
-    &.MuiIconButton-root:nth-child(2) {
+
+    &:nth-child(2) button.MuiIconButton-root {
       color: green;
     }
-    &.MuiIconButton-root:nth-child(3) {
+
+    &:nth-child(3) button.MuiIconButton-root {
       color: blue;
     }
 
@@ -116,39 +163,32 @@ const ActionBlogPostLayout = styled.div`
       color: ${Colors.gray};
     }
 
-    &:nth-child(1):hover .MuiSvgIcon-root {
-      color: red;
-    }
-    &:nth-child(2):hover .MuiSvgIcon-root {
-      color: green;
-    }
-    &:nth-child(3):hover .MuiSvgIcon-root {
-      color: blue;
-    }
-
-    ${minWidth('md')} {
-      margin-bottom: 32px;
-    }
-
     .MuiSvgIcon-root {
       width: 24px;
       height: 24px;
+
       ${minWidth('md')} {
         width: 28px;
         height: 28px;
       }
     }
+
+    span {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
   }
 
-  button:nth-child(1):hover .MuiSvgIcon-root {
+  .button-wrapper:nth-child(1) button:hover .MuiSvgIcon-root {
     color: red;
   }
-  button:nth-child(2):hover .MuiSvgIcon-root {
+
+  .button-wrapper:nth-child(2) button:hover .MuiSvgIcon-root {
     color: green;
   }
-  button:nth-child(3):hover .MuiSvgIcon-root {
+
+  .button-wrapper:nth-child(3) button:hover .MuiSvgIcon-root {
     color: blue;
   }
 `;
-
-export default AppActionBlogPost;
