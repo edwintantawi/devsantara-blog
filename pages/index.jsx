@@ -3,7 +3,7 @@ import AppHomeContent from '../components/molecules/AppHomeContent';
 
 const Home = () => (
   <AppShell>
-    <AppHomeContent endpoint="posts" />
+    <AppHomeContent endpoint="posts" pagination limit={10} />
   </AppShell>
 );
 

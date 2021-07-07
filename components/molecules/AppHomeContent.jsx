@@ -8,9 +8,16 @@ import AppErrorState from '../atoms/AppErrorState';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
-const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
+const AppHomeContent = ({
+  endpoint,
+  limit,
+  seeAllPostAction,
+  editable,
+  pagination,
+}) => {
   const [blogposts, setBlogposts] = useState([]);
   const [error, setError] = useState(false);
+  const [lastId, setLastId] = useState(null);
   const [errorMessage, setErrorMessage] = useState([
     'Ooops somethings wrong...',
     'Try to refresh the page',
@@ -19,17 +26,16 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
   const getBlogposts = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/${endpoint}`
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/${endpoint}${
+          lastId ? `?lastId=${lastId}` : ''
+        }`
       );
       const responseJson = await response.json();
-      if (response.status === 404) {
-        setErrorMessage([
-          "Ooops you don't have any posts",
-          'make sure you have created and have your own post',
-        ]);
+      if (!responseJson.results.length) {
+        setErrorMessage(['Ooops nothings here', 'create your own posts']);
         setError(true);
       } else {
-        setBlogposts(responseJson.results);
+        setBlogposts((prev) => [...prev, ...responseJson.results]);
       }
     } catch (e) {
       console.error(e);
@@ -39,39 +45,60 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
 
   useEffect(() => {
     getBlogposts();
-  }, []);
+  }, [lastId]);
 
-  if (error) {
-    return <AppErrorState message={errorMessage} />;
-  }
+  const infiniteScroll = () => {
+    const windowInnerHeight = window.innerHeight;
+    const documentElScrollToTop = document.documentElement.scrollTop;
+    const documentElOffsetHeight = document.documentElement.offsetHeight;
+
+    if (
+      parseInt(windowInnerHeight + documentElScrollToTop, 10) ===
+      documentElOffsetHeight
+    ) {
+      setLastId(blogposts[blogposts.length - 1].id);
+    }
+  };
+
+  useEffect(() => {
+    if (pagination === true && !blogposts.length === false) {
+      window.addEventListener('scroll', infiniteScroll);
+    }
+    return () => {
+      window.removeEventListener('scroll', infiniteScroll);
+    };
+  }, [blogposts]);
 
   return (
     <div>
-      {!blogposts.length && (
-        <>
-          {Array(limit)
-            .fill(1)
-            .map((value, index) => (
-              <AppBlogpostCardSkeleton key={index} />
-            ))}
-        </>
-      )}
-      {blogposts.map(({ id, data }, index) => (
-        <AppBlogpostCard
-          editable={editable}
-          key={id}
-          id={id}
-          index={index}
-          data={data}
-        />
-      ))}
-      {seeAllPostAction && !error ? (
-        <Link href="/myposts" passHref>
-          <DashboardAction>
-            <p>See all my posts</p>
-          </DashboardAction>
-        </Link>
-      ) : null}
+      <div>
+        {!blogposts.length && (
+          <>
+            {Array(limit)
+              .fill(1)
+              .map((value, index) => (
+                <AppBlogpostCardSkeleton key={index} />
+              ))}
+          </>
+        )}
+        {blogposts.map(({ id, data }, index) => (
+          <AppBlogpostCard
+            editable={editable}
+            key={id}
+            id={id}
+            index={index}
+            data={data}
+          />
+        ))}
+        {seeAllPostAction && !error ? (
+          <Link href="/myposts" passHref>
+            <DashboardAction>
+              <p>See all my posts</p>
+            </DashboardAction>
+          </Link>
+        ) : null}
+      </div>
+      {error && <AppErrorState message={errorMessage} />}
     </div>
   );
 };
