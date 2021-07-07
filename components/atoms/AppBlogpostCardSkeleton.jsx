@@ -1,11 +1,12 @@
 import { Avatar } from '@material-ui/core';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
 const AppBlogCardSkeleton = () => (
   <BlogCardLayout>
     <BlogCardContent>
+      <div className="flash" />
       <BlogCardAuthor>
         <Avatar style={{ width: '2rem', height: '2rem' }} />
         <BlogCardIdentity>
@@ -44,11 +45,31 @@ const BlogCardLayout = styled.article`
   }
 `;
 
+const Flash = keyframes`
+  to{
+    right: -110%;
+  }
+`;
+
 const BlogCardContent = styled.div`
   padding: 8px 18px 16px;
+  overflow: hidden;
+  position: relative;
 
   ${minWidth('md')} {
     padding: 16px 24px 24px;
+  }
+
+  .flash {
+    position: absolute;
+    right: 110%;
+    background-color: ${Colors.lightGray};
+    width: 100px;
+    height: 100%;
+    opacity: 0.5;
+    z-index: 2;
+    transform: skewX(-40deg);
+    animation: ${Flash} 1.8s ease-in-out infinite;
   }
 
   .h3 {

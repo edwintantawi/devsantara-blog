@@ -62,14 +62,7 @@ const AppHomeContent = ({ endpoint, limit, seeAllPostAction, editable }) => {
           key={id}
           id={id}
           index={index}
-          data={{
-            bannerImage: data.bannerImage,
-            authorPicture: data.authorPicture,
-            authorName: data.authorName,
-            createAt: data.createAt,
-            title: data.title,
-            tags: data.tags,
-          }}
+          data={data}
         />
       ))}
       {seeAllPostAction && !error ? (

@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import { IconButton } from '@material-ui/core';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import ShareIcon from '@material-ui/icons/Share';
 import EditIcon from '@material-ui/icons/Edit';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -46,6 +49,20 @@ const AppBlogCard = ({ index, id, data, editable }) => (
         {data.tags.map((tag) => (
           <span key={tag.id}>#{tag.title}</span>
         ))}
+      </div>
+      <div className="post-stats">
+        <div>
+          <FavoriteBorderIcon />
+          <span>{data.likes.length}</span>
+        </div>
+        <div>
+          <BookmarkBorderIcon />
+          <span>-</span>
+        </div>
+        <div>
+          <ShareIcon />
+          <span>-</span>
+        </div>
       </div>
     </BlogCardContent>
   </BlogCardLayout>
@@ -99,13 +116,49 @@ const BlogCardContent = styled.div`
 
   & .tags {
     margin-top: 8px;
+
     span {
       display: inline-block;
       margin-right: 0.8rem;
       color: ${Colors.gray};
+      padding: 2px 4px;
+      border-radius: 4px;
+      background-color: #e7e7e7;
       font-size: 12px;
+
       ${minWidth('md')} {
         font-size: 14px;
+      }
+    }
+  }
+
+  & .post-stats {
+    display: flex;
+    margin: 16px 0 0;
+
+    & > div {
+      margin-right: 26px;
+      display: flex;
+      align-items: center;
+      color: ${Colors.gray};
+
+      .MuiSvgIcon-root {
+        font-size: 18px;
+
+        ${minWidth('md')} {
+          font-size: 20px;
+        }
+      }
+
+      span {
+        font-size: 12px;
+        margin-left: 3px;
+
+        ${minWidth('md')} {
+          font-size: 14px;
+          margin-left: 4px;
+          margin-top: 2px;
+        }
       }
     }
   }
