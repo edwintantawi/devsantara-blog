@@ -55,14 +55,16 @@ const BlogPostHeading = styled.header`
 
     span {
       display: inline-block;
-      margin: 0 0.5rem 0.5rem 0;
-      padding: 0.2rem 0.5rem;
+      margin: 0 8px 8px 0;
+      padding: 2px 5px;
       color: ${Colors.gray};
+      border-radius: 4px;
       font-size: 12px;
       background-color: ${Colors.lightGray};
 
       ${minWidth('md')} {
         font-size: 14px;
+        margin: 0 10px 10px 0;
       }
     }
   }

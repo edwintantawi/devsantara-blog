@@ -119,15 +119,16 @@ const BlogCardContent = styled.div`
 
     span {
       display: inline-block;
-      margin-right: 0.8rem;
+      margin-right: 8px;
       color: ${Colors.gray};
-      padding: 2px 4px;
+      padding: 2px 5px;
       border-radius: 4px;
-      background-color: #e7e7e7;
+      background-color: #ececec;
       font-size: 12px;
 
       ${minWidth('md')} {
         font-size: 14px;
+        margin-right: 10px;
       }
     }
   }
