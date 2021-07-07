@@ -16,6 +16,7 @@ const AppHomeContent = ({
   pagination,
 }) => {
   const [blogposts, setBlogposts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [lastId, setLastId] = useState(null);
   const [errorMessage, setErrorMessage] = useState([
@@ -24,6 +25,7 @@ const AppHomeContent = ({
   ]);
 
   const getBlogposts = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/${endpoint}${
@@ -35,6 +37,7 @@ const AppHomeContent = ({
         setErrorMessage(['Ooops nothings here', 'create your own posts']);
         setError(true);
       } else {
+        setLoading(false);
         setBlogposts((prev) => [...prev, ...responseJson.results]);
       }
     } catch (e) {
@@ -51,9 +54,14 @@ const AppHomeContent = ({
     const windowInnerHeight = window.innerHeight;
     const documentElScrollToTop = document.documentElement.scrollTop;
     const documentElOffsetHeight = document.documentElement.offsetHeight;
+
+    // console.log(
+    //   Math.floor(windowInnerHeight + documentElScrollToTop),
+    //   documentElOffsetHeight - 50
+    // );
     if (
-      Math.ceil(windowInnerHeight + documentElScrollToTop) ===
-      documentElOffsetHeight
+      Math.floor(windowInnerHeight + documentElScrollToTop) >=
+      documentElOffsetHeight - 50
     ) {
       setLastId(blogposts[blogposts.length - 1].id);
     }
@@ -71,15 +79,6 @@ const AppHomeContent = ({
   return (
     <div>
       <div>
-        {blogposts.length === 0 && error !== true ? (
-          <>
-            {Array(limit)
-              .fill(1)
-              .map((value, index) => (
-                <AppBlogpostCardSkeleton key={index} />
-              ))}
-          </>
-        ) : null}
         {blogposts.map(({ id, data }, index) => (
           <AppBlogpostCard
             editable={editable}
@@ -97,6 +96,15 @@ const AppHomeContent = ({
           </Link>
         ) : null}
       </div>
+      {loading === true && error !== true ? (
+        <>
+          {Array(limit)
+            .fill(1)
+            .map((value, index) => (
+              <AppBlogpostCardSkeleton key={index} />
+            ))}
+        </>
+      ) : null}
       {error && <AppErrorState message={errorMessage} />}
     </div>
   );
