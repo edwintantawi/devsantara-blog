@@ -51,9 +51,8 @@ const AppHomeContent = ({
     const windowInnerHeight = window.innerHeight;
     const documentElScrollToTop = document.documentElement.scrollTop;
     const documentElOffsetHeight = document.documentElement.offsetHeight;
-
     if (
-      parseInt(windowInnerHeight + documentElScrollToTop, 10) ===
+      Math.ceil(windowInnerHeight + documentElScrollToTop) ===
       documentElOffsetHeight
     ) {
       setLastId(blogposts[blogposts.length - 1].id);
@@ -72,7 +71,7 @@ const AppHomeContent = ({
   return (
     <div>
       <div>
-        {!blogposts.length && (
+        {blogposts.length === 0 && error !== true ? (
           <>
             {Array(limit)
               .fill(1)
@@ -80,7 +79,7 @@ const AppHomeContent = ({
                 <AppBlogpostCardSkeleton key={index} />
               ))}
           </>
-        )}
+        ) : null}
         {blogposts.map(({ id, data }, index) => (
           <AppBlogpostCard
             editable={editable}
