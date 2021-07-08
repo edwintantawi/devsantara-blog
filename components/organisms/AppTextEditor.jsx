@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEditor, EditorContent } from '@tiptap/react';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import UpdateIcon from '@material-ui/icons/Update';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -19,6 +20,7 @@ const AppTextEditor = ({ editableContent }) => {
   const [tags, setTags] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [approval, setApproval] = useState(false);
   const router = useRouter();
 
   const editor = useEditor({
@@ -85,8 +87,40 @@ const AppTextEditor = ({ editableContent }) => {
     });
   };
 
+  const handleDeletePost = async () => {
+    setLoading(true);
+    auth.currentUser.getIdToken(true).then(async (token) => {
+      const options = { method: 'DELETE', headers: { token } };
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_DOMAIN}/api/posts/delete?id=${editableContent.id}`,
+          options
+        );
+        if (response.status === 200) {
+          await router.push('/dashboard');
+        } else {
+          setError(true);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    });
+  };
+
+  const handleOnClickReject = () => {
+    setApproval(false);
+  };
+
   return (
     <>
+      {approval && (
+        <AppLoader
+          type="approval"
+          message="Are you sure want to delete it?"
+          onClick={handleDeletePost}
+          onClickReject={handleOnClickReject}
+        />
+      )}
       {loading && (
         <AppLoader type="loading" message="showing all over the world" />
       )}
@@ -123,6 +157,17 @@ const AppTextEditor = ({ editableContent }) => {
             </EditorStyle>
           </EditorLayout>
           <EditorAction>
+            {Object.entries(editableContent).length ? (
+              <AppButton
+                type="button"
+                className="bg-red"
+                style={{ marginRight: '8px' }}
+                onClick={() => setApproval(true)}
+              >
+                <DeleteOutlineIcon />
+                <span>Delete</span>
+              </AppButton>
+            ) : null}
             <AppButton type="submit" className="large">
               {Object.entries(editableContent).length ? (
                 <UpdateIcon />

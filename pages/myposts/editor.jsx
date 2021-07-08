@@ -7,6 +7,7 @@ import AppLoading from '../../components/atoms/AppLoading';
 
 const Editor = () => {
   const [{ user }] = useAuthContext();
+  const [loading, setLoading] = useState(true);
   const [blogpost, setBlogpost] = useState({});
   const router = useRouter();
   const { id } = router.query;
@@ -18,23 +19,29 @@ const Editor = () => {
       );
       const responseJson = await response.json();
       if (response.status === 404) {
-        router.push('/dashboard');
+        await router.push('/dashboard');
+      } else if (responseJson.result.authorUid === user.uid) {
+        setLoading(false);
+        setBlogpost(responseJson.result);
+      } else {
+        await router.push('/dashboard');
       }
-      setBlogpost(responseJson.result);
     } catch (e) {
-      router.push('/dashboard');
+      await router.push('/dashboard');
     }
   };
 
   useEffect(() => {
     if (id) {
       getBlogpost();
+    } else {
+      setLoading(false);
     }
   }, [id]);
 
   if (!user) {
     router.push('/');
-  } else {
+  } else if (!loading) {
     return (
       <AppShell>
         <AppTextEditor editableContent={blogpost} />

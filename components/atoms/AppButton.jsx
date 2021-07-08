@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Colors from '../../styles/colors';
 import minWidth from '../../styles/mediaQuery';
 
-const AppButton = ({ children, type, className, onClick }) => (
-  <Button type={type} className={className} onClick={onClick}>
+const AppButton = ({ children, type, className, onClick, style }) => (
+  <Button type={type} className={className} onClick={onClick} style={style}>
     {children}
   </Button>
 );
@@ -14,7 +14,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 32px;
+  padding: 0 20px;
   height: 40px;
   width: max-content;
   border-radius: 4px;
@@ -23,6 +23,10 @@ const Button = styled.button`
   cursor: pointer;
   background-color: ${Colors.darkBlue};
   color: ${Colors.white};
+
+  ${minWidth('md')} {
+    padding: 0 32px;
+  }
 
   span {
     margin-left: 8px;
